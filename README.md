@@ -6,6 +6,10 @@ After updating composer, add the ServiceProvider to the providers array in confi
    
     'Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider',
     
+You can now generate transformer classes in artisan
+
+php artisan make:transformer
+
 You can also publish the config-file to change implementations to suits you.
 
    
