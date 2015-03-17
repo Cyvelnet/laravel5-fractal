@@ -105,7 +105,7 @@ class FractalServices
         $resources = new Collection($items, $transformer, $resourceKey);
 
         if ($items instanceof Paginator OR $items instanceof LengthAwarePaginator) {
-            
+
             // for some reason in laravel5, we might not always receive a LengthAwarePaginator
             if ($items instanceof LengthAwarePaginator and is_null($adapter)) {
                 $adapter = new IlluminateLengthAwarePaginatorAdapter($items);
