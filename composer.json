@@ -1,6 +1,6 @@
 {
     "name": "cyvelnet/laravel5-fractal",
-    "description": "",
+    "description": "A simple fractal service provider and transformer generator for laravel 5.",
     "authors": [
         {
             "name": "Cyvelnet",
