@@ -3,6 +3,10 @@ A simple fractal service provider and transformer generator for laravel 5
 
 <sup>welcome to my first laravel package, lets rock.<sup>
 
+Require this package with composer using the following command:
+
+    "cyvelnet/laravel5-fractal": "~1.0"
+
 
 After updating composer, add the ServiceProvider to the providers array in config/app.php
 
