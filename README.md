@@ -9,7 +9,7 @@ After updating composer, add the ServiceProvider to the providers array in confi
 You can now generate transformer classes in artisan
 
  
-    'php artisan make:transformer',
+    php artisan make:transformer
     
 
 You can also publish the config-file to change implementations to suits you.
