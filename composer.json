@@ -1,0 +1,24 @@
+{
+    "name": "cyvelnet/laravel5-fractal",
+    "description": "",
+    "authors": [
+        {
+            "name": "Cyvelnet",
+            "email": "cyvelnet@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.0.*",
+        "league/fractal" :"0.11.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Cyvelnet\\Laravel5Fractal\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
