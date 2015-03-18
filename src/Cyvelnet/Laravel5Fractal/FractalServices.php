@@ -94,7 +94,6 @@ class FractalServices
      * @param null $resourceKey
      * @param PaginatorInterface $adapter
      * @return mixed
-     * @internal param Closure $callback
      */
     public function collection(
         $items,
