@@ -72,8 +72,8 @@ class TransformerGeneratorCommand extends Command
             $classname = preg_replace('/\s+/', '', ucwords($this->argument('name')));
 
             //retrieves store directory configuration
-            $directory = app_path($this->option('directory') ? $this->option('directory') : $this->config->get('fractal
-            .directory'));
+            $directory = app_path($this->option('directory') ? $this->option('directory') : 
+            $this->config->get('fractal.directory'));
             //retrieves namespace configuration
             $namespace = $this->option('namespace') ? $this->option('namespace') : $this->config->get('fractal.namespace');
             is_dir($directory) ?: $this->file->makeDirectory($directory, 0755, true);
