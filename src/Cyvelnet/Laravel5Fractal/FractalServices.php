@@ -1,6 +1,8 @@
 <?php namespace Cyvelnet\Laravel5Fractal;
 
+use Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter;
 use Cyvelnet\Laravel5Fractal\Paginators\IlluminateLengthAwarePaginatorAdapter;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use League\Fractal\Manager;
@@ -10,7 +12,6 @@ use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\ResourceInterface;
 use League\Fractal\TransformerAbstract;
-use Response;
 
 /**
  * Class FractalServices
@@ -24,8 +25,9 @@ class FractalServices
      */
     private $manager;
 
+
     /**
-     * @param Manager $fractalManager
+     * @param Manager $manager
      */
     public function __construct(Manager $manager)
     {
@@ -84,7 +86,7 @@ class FractalServices
     {
         $resource = new Item($item, $transformer, $resourceKey);
 
-        return $this->response($resource);
+        return $this->scope($resource);
     }
 
     /**
@@ -105,29 +107,39 @@ class FractalServices
 
         if ($items instanceof Paginator OR $items instanceof LengthAwarePaginator) {
 
-            // for some reason in laravel5, we might not always receive a LengthAwarePaginator
-            if ($items instanceof LengthAwarePaginator and is_null($adapter)) {
-                $adapter = new IlluminateLengthAwarePaginatorAdapter($items);
-            } else {
-                if ($items instanceof Paginator and is_null($adapter)) {
-                    $adapter = new IlluminatePaginatorAdapter($items);
-                }
-            }
-
-            $resources->setPaginator($adapter);
-
+            $this->withPaginator($items, $resources, $adapter);
         }
-        return $this->response($resources);
+        return $this->scope($resources);
     }
 
     /**
-     * return result array as json
+     * return result scope
      * @param ResourceInterface $resource
-     * @return mixed
+     * @return \League\Fractal\Scope $scope
      */
-    private function response(ResourceInterface $resource)
+    private function scope(ResourceInterface $resource)
     {
-        $fratalData = $this->manager->createData($resource);
-        return Response::json($fratalData->toArray());
+        return new ScopeDataAdapter($this->manager->createData($resource));
     }
+
+    /**
+     * set a paginator meta when a paginator instance detected
+     * @param $items
+     * @param $resources
+     * @param $adapter
+     */
+    private function withPaginator($items, &$resources, $adapter)
+    {
+        // for some reason in laravel5, we might not always receive a LengthAwarePaginator
+        if ($items instanceof LengthAwarePaginator and is_null($adapter)) {
+            $adapter = new IlluminateLengthAwarePaginatorAdapter($items);
+        } else {
+            if ($items instanceof Paginator and is_null($adapter)) {
+                $adapter = new IlluminatePaginatorAdapter($items);
+            }
+        }
+
+        $resources->setPaginator($adapter);
+    }
+
 }

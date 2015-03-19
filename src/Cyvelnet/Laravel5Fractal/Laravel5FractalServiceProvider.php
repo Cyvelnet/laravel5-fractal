@@ -44,21 +44,19 @@ class Laravel5FractalServiceProvider extends ServiceProvider
 
         $this->app->singleton('fractal', function ($app) {
 
-
             // retrieves if autoload config is set.
-            // $autoload = $app['request']->input($app['config']->get('fractal::autoload'));
+
             $autoload = $app['config']->get('fractal.autoload');
             $input_key = $app['config']->get('fractal.input_key');
             $serializer = $app['config']->get('fractal.serializer');
 
-            // retrieves dynamic includes for fractal in input array with a defined config input_key
-
-
             // creating fractal manager instance
             $manager = new Manager();
+            $factalNamespace = 'League\\Fractal\\Serializer\\';
 
 
-            $loadSerializer = (class_exists("League\\Fractal\\Serializer\\$serializer")) ? "League\\Fractal\\Serializer\\$serializer" : $serializer;
+            $loadSerializer = (class_exists($factalNamespace . $serializer)) ?
+                $factalNamespace . $serializer : $serializer;
 
             $manager->setSerializer(new $loadSerializer);
 
