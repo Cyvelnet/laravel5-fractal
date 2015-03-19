@@ -38,6 +38,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
     }
 
     /**
+     * generate a json response
      * @param int $http_status
      * @param array $header
      * @return \Symfony\Component\HttpFoundation\Response
@@ -48,15 +49,18 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
     }
 
     /**
-     *
+     * get the transformed array data
+     * @return array
      */
     public function getArray()
     {
         return $this->scope->toArray();
     }
 
+
     /**
-     *
+     * get the fransformed json data
+     * @return string
      */
     public function getJson()
     {
