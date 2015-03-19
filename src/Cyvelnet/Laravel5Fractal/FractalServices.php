@@ -115,7 +115,7 @@ class FractalServices
     /**
      * return result scope
      * @param ResourceInterface $resource
-     * @return \League\Fractal\Scope $scope
+     * @return ScopeDataAdapter
      */
     private function scope(ResourceInterface $resource)
     {

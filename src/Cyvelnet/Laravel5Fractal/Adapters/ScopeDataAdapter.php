@@ -4,9 +4,7 @@
  * Date: 3/19/2015
  * Time: 12:08 PM
  */
-
 namespace Cyvelnet\Laravel5Fractal\Adapters;
-
 
 use Illuminate\Contracts\Routing\ResponseFactory;
 use League\Fractal\Scope;
@@ -30,7 +28,6 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
 
     /**
      * @param Scope $scope
-     * @param ResponseFactory $response
      */
     function __construct(Scope $scope)
     {
@@ -59,7 +56,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
 
 
     /**
-     * get the fransformed json data
+     * get the transformed json data
      * @return string
      */
     public function getJson()
