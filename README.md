@@ -5,7 +5,7 @@ A simple fractal service provider and transformer generator for laravel 5
 
 Require this package with composer using the following command:
 
-    composer require "cyvelnet/laravel5-fractal": "1.0.*"
+    composer require cyvelnet/laravel5-fractal
 
 
 After updating composer, add the ServiceProvider to the providers array in config/app.php
@@ -13,21 +13,25 @@ After updating composer, add the ServiceProvider to the providers array in confi
    
     'Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider',
     
-Now you can start using this package by the following simple command
+Now you can start using this package with the following simple command
 
     
     $user = User::find(1);
     
-    Fractal::item($user, new UserTransformer);
+    return Fractal::item($user, new UserTransformer)->responseJson(200);
     
 OR
  
     $users = User::get(); // $users = User::paginate();
     
-    Fractal::collection($users, new UserTransformer);
+    return Fractal::collection($users, new UserTransformer)->responseJson(200);
     
 You will automatically gain some extra attributes when you passing a laravel's paginator object.
 
+In case you would like to get only the transformed array, you may do
+
+    return Fractal::collection($user, new UserTransformer)->getArray(); 
+    
 
 You may now generate transformer classes in artisan
 
