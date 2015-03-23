@@ -30,7 +30,7 @@ You will automatically gain some extra attributes when you passing a laravel's p
 
 In case you would like to get only the transformed array, you may do
 
-    return Fractal::collection($user, new UserTransformer)->getArray(); 
+    Fractal::collection($user, new UserTransformer)->getArray(); 
     
 
 You may now generate transformer classes in artisan
@@ -62,4 +62,6 @@ You can also publish the config-file to change implementations to suits you.
    
     php artisan vendor:publish
     
+##### TO DO
+* add functionality to artisan command to generate sub transformer and includes function boilerplate
     
