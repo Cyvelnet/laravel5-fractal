@@ -1,9 +1,5 @@
 <?php
-/**
- * User: Terry
- * Date: 3/19/2015
- * Time: 1:07 PM
- */
+
 namespace Cyvelnet\Laravel5Fractal\Adapters;
 
 

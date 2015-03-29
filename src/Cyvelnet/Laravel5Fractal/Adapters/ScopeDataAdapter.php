@@ -1,9 +1,5 @@
 <?php
-/**
- * User: Terry
- * Date: 3/19/2015
- * Time: 12:08 PM
- */
+
 namespace Cyvelnet\Laravel5Fractal\Adapters;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
@@ -38,7 +34,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
      * generate a json response
      * @param int $http_status
      * @param array $header
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function responseJson($http_status = 200, $header = [])
     {

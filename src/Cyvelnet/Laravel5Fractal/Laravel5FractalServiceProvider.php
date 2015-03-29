@@ -65,7 +65,6 @@ class Laravel5FractalServiceProvider extends ServiceProvider
             }
 
             return new FractalServices($manager);
-
         });
 
         // register our command here
@@ -76,7 +75,6 @@ class Laravel5FractalServiceProvider extends ServiceProvider
             }
         );
         $this->commands('command.transformer.generate');
-
 
     }
 

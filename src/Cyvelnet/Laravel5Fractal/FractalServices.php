@@ -80,7 +80,7 @@ class FractalServices
      * @param $item
      * @param TransformerAbstract $transformer
      * @param null $resourceKey
-     * @return mixed
+     * @return ScopeDataAdapter
      */
     public function item($item, TransformerAbstract $transformer, $resourceKey = null)
     {
@@ -95,7 +95,7 @@ class FractalServices
      * @param TransformerAbstract $transformer
      * @param null $resourceKey
      * @param PaginatorInterface $adapter
-     * @return mixed
+     * @return ScopeDataAdapter
      */
     public function collection(
         $items,
