@@ -80,7 +80,7 @@ class FractalServices
      * @param $item
      * @param TransformerAbstract $transformer
      * @param null $resourceKey
-     * @return ScopeDataAdapter
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
     public function item($item, TransformerAbstract $transformer, $resourceKey = null)
     {
@@ -95,7 +95,7 @@ class FractalServices
      * @param TransformerAbstract $transformer
      * @param null $resourceKey
      * @param PaginatorInterface $adapter
-     * @return ScopeDataAdapter
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
     public function collection(
         $items,
@@ -115,7 +115,7 @@ class FractalServices
     /**
      * return result scope
      * @param ResourceInterface $resource
-     * @return ScopeDataAdapter
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
     private function scope(ResourceInterface $resource)
     {
