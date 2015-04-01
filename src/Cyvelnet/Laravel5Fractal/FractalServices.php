@@ -56,7 +56,7 @@ class FractalServices
     {
         // when autoload is enable, we need to merge user requested includes with the predefined includes.
         if ($this->autoload AND $this->request->get($this->input_key)) {
-            $includes = array_merge($includes, implode(',', $this->request->get($this->input_key)));
+            $includes = array_merge($includes, explode(',', $this->request->get($this->input_key)));
         }
 
         $this->manager->parseIncludes($includes);
