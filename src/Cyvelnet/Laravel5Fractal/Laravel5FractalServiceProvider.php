@@ -64,7 +64,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
                 $manager->parseIncludes($includes);
             }
 
-            return new FractalServices($manager);
+            return new FractalServices($manager, $app['app']);
         });
 
         // register our command here

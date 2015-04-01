@@ -1,10 +1,9 @@
 <?php namespace Cyvelnet\Laravel5Fractal;
 
 use Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter;
-use Cyvelnet\Laravel5Fractal\Paginators\IlluminateLengthAwarePaginatorAdapter;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 use League\Fractal\Manager;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Pagination\PaginatorInterface;
@@ -24,14 +23,20 @@ class FractalServices
      * @var Manager
      */
     private $manager;
+    private $autoload;
+    private $request;
 
 
     /**
      * @param Manager $manager
+     * @param Container $app
      */
-    public function __construct(Manager $manager)
+    public function __construct(Manager $manager, Container $app)
     {
         $this->manager = $manager;
+        $this->autoload = $app['config']->get('fractal.autoload');
+        $this->input_key = $app['config']->get('fractal.input_key');
+        $this->request = $app['request'];
     }
 
     /**
@@ -47,8 +52,13 @@ class FractalServices
      * @param array $includes
      * @return $this
      */
-    public function includes($includes = [])
+    public function includes(array $includes)
     {
+        // when autoload is enable, we need to merge user requested includes with the predefined includes.
+        if ($this->autoload AND $this->request->get($this->input_key)) {
+            $includes = array_merge($includes, implode(',', $this->request->get($this->input_key)));
+        }
+
         $this->manager->parseIncludes($includes);
         return $this;
     }
@@ -105,8 +115,7 @@ class FractalServices
     ) {
         $resources = new Collection($items, $transformer, $resourceKey);
 
-        if ($items instanceof Paginator OR $items instanceof LengthAwarePaginator) {
-
+        if ($items instanceof LengthAwarePaginator) {
             $this->withPaginator($items, $resources, $adapter);
         }
         return $this->scope($resources);
@@ -130,15 +139,7 @@ class FractalServices
      */
     private function withPaginator($items, &$resources, $adapter)
     {
-        // for some reason in laravel5, we might not always receive a LengthAwarePaginator
-        if ($items instanceof LengthAwarePaginator and is_null($adapter)) {
-            $adapter = new IlluminateLengthAwarePaginatorAdapter($items);
-        } else {
-            if ($items instanceof Paginator and is_null($adapter)) {
-                $adapter = new IlluminatePaginatorAdapter($items);
-            }
-        }
-
+        $adapter = new IlluminatePaginatorAdapter($items);
         $resources->setPaginator($adapter);
     }
 
