@@ -1,4 +1,7 @@
-<?= '<?php' ?> namespace {{ $namespace }};
+<?= '<?php' ?>
+
+
+namespace {{ $namespace }};
 
 use League\Fractal;
 use League\Fractal\TransformerAbstract;
@@ -7,30 +10,28 @@ use League\Fractal\Resource\Item;
 
 class {{ $classname }} extends TransformerAbstract
 {
-	/**
-	 * List of resources possible to include
-	 *
-	 * @var array
-	 */
-	protected $availableIncludes = [];
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected $availableIncludes = [];
 
-	/**
-	 * List of resources to automatically include
-	 *
-	 * @var array
-	 */
-	protected $defaultIncludes = [];
+    /**
+     * List of resources to automatically include
+     *
+     * @var array
+     */
+    protected $defaultIncludes = [];
 
-	/**
-	 * Transform object into a generic array
-	 *
-	 * @var object
-	 */
-	public function transform($resource)
-	{
-		//return new \League\Fractal\Resource\Collection($resource,new ResourceTransformer);
-	}
+    /**
+     * Transform object into a generic array
+     *
+     * @var object
+     */
+    public function transform($resource)
+    {
+        //return new \League\Fractal\Resource\Collection($resource,new ResourceTransformer);
+    }
+
 }
-
-<?= '?>' ?>
-
