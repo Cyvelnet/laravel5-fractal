@@ -1,10 +1,14 @@
-<?php namespace Cyvelnet\Laravel5Fractal\Serializers;
+<?php
+
+namespace Cyvelnet\Laravel5Fractal\Serializers;
 
 use League\Fractal\Pagination\PaginatorInterface;
 use League\Fractal\Serializer\ArraySerializer;
 
+
 /**
  * Class ExtendedArraySerializer
+ *
  * @package Cyvelnet\Laravel5Fractal\Serializers
  */
 class ExtendedArraySerializer extends ArraySerializer
@@ -23,17 +27,16 @@ class ExtendedArraySerializer extends ArraySerializer
         $lastPage = (int)$paginator->getLastPage();
 
         $pagination = array(
-            'total' => (int)$paginator->getTotal(),
-            'count' => (int)$paginator->getCount(),
-            'per_page' => (int)$paginator->getPerPage(),
+            'total'        => (int)$paginator->getTotal(),
+            'count'        => (int)$paginator->getCount(),
+            'per_page'     => (int)$paginator->getPerPage(),
             'current_page' => $currentPage,
-            'total_pages' => $lastPage,
+            'total_pages'  => $lastPage,
         );
 
         $pagination['links'] = array();
 
-        if($currentPage !== 1)
-        {
+        if ($currentPage !== 1) {
             $pagination['links']['first'] = $paginator->getUrl(1);
         }
 
@@ -42,8 +45,7 @@ class ExtendedArraySerializer extends ArraySerializer
         }
 
         // add fast backward
-        if(($fastBack = ($currentPage - 10)) >= 1)
-        {
+        if (($fastBack = ($currentPage - 10)) >= 1) {
             $pagination['links']['fastback'] = $paginator->getUrl($fastBack);
         }
 
@@ -52,8 +54,7 @@ class ExtendedArraySerializer extends ArraySerializer
         }
 
         // add fast backward
-        if(($fastForward = ($currentPage + 10)) <= $lastPage)
-        {
+        if (($fastForward = ($currentPage + 10)) <= $lastPage) {
             $pagination['links']['fastforward'] = $paginator->getUrl($fastForward);
         }
 
