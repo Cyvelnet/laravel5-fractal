@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class TransformerGeneratorCommand
+ *
  * @package Cyvelnet\Laravel5Fractal\Commands
  */
 class TransformerGeneratorCommand extends Command
@@ -71,9 +72,10 @@ class TransformerGeneratorCommand extends Command
             // replace all space after ucwords
             $classname = preg_replace('/\s+/', '', ucwords($this->argument('name')));
 
+
             //retrieves store directory configuration
-            $directory = app_path($this->option('directory') ? $this->option('directory') : 
-            $this->config->get('fractal.directory'));
+            $directory = $this->option('directory') ? $this->appPath($this->option('directory')) : $this->appPath($this->config->get('fractal.directory'));
+
             //retrieves namespace configuration
             $namespace = $this->option('namespace') ? $this->option('namespace') : $this->config->get('fractal.namespace');
             is_dir($directory) ?: $this->file->makeDirectory($directory, 0755, true);
@@ -104,7 +106,7 @@ class TransformerGeneratorCommand extends Command
             }
 
             // loading transformers template from views
-            $view = \View::make('fractal::transformer',
+            $view = $this->view->make('fractal::transformer',
                 ['namespace' => $namespace, 'classname' => $classname]);
 
 
@@ -119,6 +121,18 @@ class TransformerGeneratorCommand extends Command
         }
 
 
+    }
+
+    /**
+     * get application path
+     *
+     * @param $path
+     *
+     * @return string
+     */
+    private function appPath($path)
+    {
+        return base_path('/app/' . $path);
     }
 
     /**

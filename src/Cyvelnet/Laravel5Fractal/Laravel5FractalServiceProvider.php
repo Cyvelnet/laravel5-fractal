@@ -1,5 +1,6 @@
 <?php namespace Cyvelnet\Laravel5Fractal;
 
+use Cyvelnet\Laravel5Fractal\Commands\TransformerGeneratorCommand;
 use Illuminate\Support\ServiceProvider;
 use League\Fractal\Manager;
 
@@ -22,11 +23,10 @@ class Laravel5FractalServiceProvider extends ServiceProvider
     {
 
         // register our alias
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-        $loader->alias('Fractal', 'Cyvelnet\Laravel5Fractal\Facades\Fractal');
+        class_alias('Cyvelnet\Laravel5Fractal\Facades\Fractal', 'Fractal');
 
         $source_config = __DIR__ . '/../../config/fractal.php';
-        $this->publishes([$source_config => config_path('fractal.php')], 'config');
+        $this->publishes([$source_config => 'config/fractal.php'], 'config');
 
         $this->loadViewsFrom(__DIR__ . '/../../views', 'fractal');
 
@@ -44,7 +44,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
 
         $this->app->singleton('fractal', function ($app) {
 
-            // retrieves if autoload config is set.
+            // retrieves configurations
 
             $autoload = $app['config']->get('fractal.autoload');
             $input_key = $app['config']->get('fractal.input_key');
@@ -71,7 +71,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
 
         $this->app['command.transformer.generate'] = $this->app->share(
             function ($app) {
-                return $app->make('Cyvelnet\Laravel5Fractal\Commands\TransformerGeneratorCommand');
+                return new TransformerGeneratorCommand($app['config'], $app['view'], $app['files']);
             }
         );
         $this->commands('command.transformer.generate');
