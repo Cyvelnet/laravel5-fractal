@@ -7,19 +7,19 @@ return [
       | autoload sub level data transformers during an "input_key" variable received from user request
       |----------------------------------------------------------------------------------------------------------
      */
-    'autoload' => false,
+    'autoload'   => env('FRACTAL_AUTOLOAD', false),
     /*
       |----------------------------------------------------------------------------------------------------------
       | input_key user parameter key to include extra transformer specified in transformer class
       |----------------------------------------------------------------------------------------------------------
      */
-    'input_key' => 'include',
+    'input_key'  => env('FRACTAL_INPUT_KEY', 'include'),
     /*
       |----------------------------------------------------------------------------------------------------------
       | namespace
       |----------------------------------------------------------------------------------------------------------
      */
-    'namespace' => 'App\Transformers',
+    'namespace'  => env('FRACTAL_NAMESPACE', 'App\Transformers'),
     /*
       |----------------------------------------------------------------------------------------------------------
       | Transformers store directory
@@ -27,14 +27,13 @@ return [
       |----------------------------------------------------------------------------------------------------------
      */
 
-    'directory' => 'Transformers/',
-
+    'directory'  => env('FRACTAL_DIRECTORY', 'Transformers/'),
     /*
       |----------------------------------------------------------------------------------------------------------
       | serializer
       |----------------------------------------------------------------------------------------------------------
      */
     // you are required to provide full namespace for custom serializer
-    'serializer' => 'ArraySerializer' //DataArraySerializer,JsonApiSerializer, ArraySerializer
+    'serializer' => env('FRACTAL_SERIALIZER', 'ArraySerializer')//DataArraySerializer,JsonApiSerializer, ArraySerializer
 
 ];
