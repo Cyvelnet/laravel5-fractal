@@ -21,15 +21,10 @@ class Laravel5FractalServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        // register our alias
-        class_alias('Cyvelnet\Laravel5Fractal\Facades\Fractal', 'Fractal');
-
         $source_config = __DIR__ . '/../../config/fractal.php';
         $this->publishes([$source_config => 'config/fractal.php'], 'config');
 
         $this->loadViewsFrom(__DIR__ . '/../../views', 'fractal');
-
     }
 
     /**
