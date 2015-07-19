@@ -9,6 +9,7 @@ Require this package with composer using the following command:
 
     composer require cyvelnet/laravel5-fractal
 
+#### Laravel 5
 
 After updating composer, add the ServiceProvider to the providers array in config/app.php for laravel>=5
 
@@ -18,7 +19,9 @@ and register Facade
 
     'Fractal' => Cyvelnet\Laravel5Fractal\Facades\Fractal::class
 
-OR register service provider in /bootstrap/app.php for lumen
+#### Lumen
+
+register service provider in /bootstrap/app.php for lumen
     
     $app->register(Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider::class);
 
@@ -79,6 +82,9 @@ You can also publish the config-file to change implementations to suits you.
 
 
     php artisan vendor:publish
+
+
+#### For the reason, number of changes to port to Lumen are very minimal, new branch will be added for future breaking changes between laravel 5 and lumen.
 
 ##### TO DO
 * add functionality to artisan command to generate sub transformer and includes function boilerplate
