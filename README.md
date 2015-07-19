@@ -3,7 +3,7 @@ A simple fractal service provider and transformer generator for laravel 5
 
 <sup>welcome to my first laravel package, lets rock.<sup>
 
-### New: Since version 1.1.5 auto class aliase has been removed.
+### New: Since version 1.2 auto class aliase has been removed.
 
 Require this package with composer using the following command:
 
