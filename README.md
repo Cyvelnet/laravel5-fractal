@@ -1,5 +1,5 @@
 # laravel5-fractal
-A simple fractal service provider and transformer generator for laravel 5
+A simple fractal service provider and transformer generator for laravel 5 and lumen
 
 <sup>welcome to my first laravel package, lets rock.<sup>
 
