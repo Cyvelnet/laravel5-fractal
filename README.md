@@ -59,12 +59,7 @@ You may now generate transformer classes in artisan
 
     php artisan make:transformer
 
-in this case we are going to use artisan make:transformer UserTransformer, transformer file will automatically created in App\Transfomers\ directory, alternately you may want to change the directory or namespace value, you may do so by providing command option
-
---directory="Directory Relative to App\" or
---namespace="Your Namespace"
-
-to overwrite the default setting.
+in this case we are going to use artisan make:transformer UserTransformer, transformer file will automatically created in App\Transfomers\ directory
 
 now you may open your generated transformer file and start formatting your data as you like
 
