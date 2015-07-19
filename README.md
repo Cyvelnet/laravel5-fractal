@@ -3,6 +3,8 @@ A simple fractal service provider and transformer generator for laravel 5
 
 <sup>welcome to my first laravel package, lets rock.<sup>
 
+### New: Since version 1.1.5 auto class aliase has been removed.
+
 Require this package with composer using the following command:
 
     composer require cyvelnet/laravel5-fractal
@@ -12,9 +14,22 @@ After updating composer, add the ServiceProvider to the providers array in confi
 
     Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider::class,
 
+and register Facade
+
+    'Fractal' => Cyvelnet\Laravel5Fractal\Facades\Fractal::class
+
 OR register service provider in /bootstrap/app.php for lumen
     
     $app->register(Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider::class);
+
+and uncomment the line
+
+    $app->withFacades();
+
+and finally register Facade with
+
+    class_alias(Cyvelnet\Laravel5Fractal\Facades\Fractal::class, 'Fractal');
+
 
 Now you can start using this package with the following simple command
 
