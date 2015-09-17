@@ -76,7 +76,7 @@ now you may open your generated transformer file and start formatting your data 
 You can also publish the config-file to change implementations to suits you.
 
 
-    php artisan vendor:publish
+    php artisan vendor:publish --provider="Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider"
 
 
 #### For the reason, number of changes to port to Lumen are very minimal, new branch will be added for future breaking changes between laravel 5 and lumen.
