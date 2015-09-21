@@ -87,7 +87,7 @@ Auto embed sub resouces are disabled by default, to enable this feature, edit ``
 
 ``autoload => true``
 
-or alternatively you may add ``FRACTAL_AUTOLOAD=true`` to ``.env`` file.
+or alternately you may add ``FRACTAL_AUTOLOAD=true`` to ``.env`` file.
 
 
 
