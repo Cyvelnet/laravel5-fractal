@@ -34,6 +34,7 @@ and finally register Facade with
     class_alias(Cyvelnet\Laravel5Fractal\Facades\Fractal::class, 'Fractal');
 
 
+
 Now you can start using this package with the following simple command
 
 
@@ -46,6 +47,7 @@ OR
     $users = User::get(); // $users = User::paginate();
 
     return Fractal::collection($users, new UserTransformer)->responseJson(200);
+
 
 You will automatically gain some extra attributes when you passing a laravel's paginator object.
 
@@ -77,6 +79,15 @@ You can also publish the config-file to change implementations to suits you.
 
 
     php artisan vendor:publish --provider="Cyvelnet\Laravel5Fractal\Laravel5FractalServiceProvider"
+    
+    
+##### Auto embed sub resources.
+
+Auto embed sub resouces are disabled by default, to enable this feature, edit ``config/fractal.php`` and set
+
+``autoload => true``
+
+or alternatively you may add ``FRACTAL_AUTOLOAD=true`` to ``.env`` file.
 
 
 #### For the reason, number of changes to port to Lumen are very minimal, new branch will be added for future breaking changes between laravel 5 and lumen.
