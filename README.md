@@ -90,8 +90,8 @@ Auto embed sub resouces are disabled by default, to enable this feature, edit ``
 or alternatively you may add ``FRACTAL_AUTOLOAD=true`` to ``.env`` file.
 
 
-#### For the reason, number of changes to port to Lumen are very minimal, new branch will be added for future breaking changes between laravel 5 and lumen.
 
-##### TO DO
+###### TO DO
 * add functionality to artisan command to generate sub transformer and includes function boilerplate
+* allow mapping nested sub resouces to a much more meaningful and shorter identifier.
 
