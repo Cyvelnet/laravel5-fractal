@@ -61,6 +61,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
 
             return new FractalServices($manager, $app['app']);
         });
+        $this->app->alias('fractal', FractalServices::class);
 
         // register our command here
 
