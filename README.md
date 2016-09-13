@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Cyvelnet/laravel5-fractal.svg?branch=2.0-dev)](https://travis-ci.org/Cyvelnet/laravel5-fractal)
+
 # laravel5-fractal
 A simple fractal service provider and transformer generator for laravel 5 and lumen
 
