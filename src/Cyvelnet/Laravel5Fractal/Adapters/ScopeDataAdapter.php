@@ -3,12 +3,11 @@
 namespace Cyvelnet\Laravel5Fractal\Adapters;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use League\Fractal\Scope;
 
 /**
- * Class ScopeResponse
+ * Class ScopeDataAdapter
  *
  * @package Cyvelnet\Laravel5Fractal
  */
