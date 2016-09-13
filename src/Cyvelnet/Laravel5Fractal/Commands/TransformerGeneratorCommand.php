@@ -264,6 +264,10 @@ class TransformerGeneratorCommand extends Command
                 return $attributes;
             }
 
+        } else {
+
+            $this->error("Your model {$class} was not found in {$namespace}\\ \r\nIf this is the first time you get this message, try to update /config/fractal.php to make changes to model_namespace accordingly.");
+            exit();
         }
 
         // use as a default attribute
