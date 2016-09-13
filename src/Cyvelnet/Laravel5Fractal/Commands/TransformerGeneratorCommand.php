@@ -12,13 +12,10 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 /**
- * Class TransformerGeneratorCommand
- *
- * @package Cyvelnet\Laravel5Fractal\Commands
+ * Class TransformerGeneratorCommand.
  */
 class TransformerGeneratorCommand extends Command
 {
-
     /**
      * The console command name.
      *
@@ -50,9 +47,9 @@ class TransformerGeneratorCommand extends Command
     private $app;
 
     /**
-     * @param \Illuminate\Config\Repository $config
-     * @param View $view
-     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Config\Repository      $config
+     * @param View                               $view
+     * @param \Illuminate\Filesystem\Filesystem  $filesystem
      * @param \Illuminate\Foundation\Application $app
      */
     public function __construct(Config $config, View $view, File $filesystem, Application $app)
@@ -100,7 +97,7 @@ class TransformerGeneratorCommand extends Command
                     null))
                 ) {
                     switch ($usrResponse) {
-                        case 'y' :
+                        case 'y':
                             $backupFile = "{$directory}/{$class}.php";
 
                             while ($this->filesystem->exists($backupFile)) {
@@ -115,7 +112,6 @@ class TransformerGeneratorCommand extends Command
                             $create = false;
                     }
                 }
-
             }
 
             // loading transformers template from views
@@ -127,17 +123,13 @@ class TransformerGeneratorCommand extends Command
                 $this->filesystem->put("{$directory}/{$class}.php", $view->render());
                 $this->info("The class {$class} generated successfully.");
             }
-
-
         } catch (\Exception $e) {
             $this->error("Transformer creation failed due to : {$e->getMessage()}");
         }
-
-
     }
 
     /**
-     * get application path
+     * get application path.
      *
      * @param $path
      *
@@ -145,7 +137,7 @@ class TransformerGeneratorCommand extends Command
      */
     private function appPath($path)
     {
-        return base_path('/app/' . $path);
+        return base_path('/app/'.$path);
     }
 
     /**
@@ -153,9 +145,9 @@ class TransformerGeneratorCommand extends Command
      */
     protected function getArguments()
     {
-        return array(
-            array('name', InputArgument::REQUIRED, 'Name of the transformer class'),
-        );
+        return [
+            ['name', InputArgument::REQUIRED, 'Name of the transformer class'],
+        ];
     }
 
     /**
@@ -163,30 +155,29 @@ class TransformerGeneratorCommand extends Command
      */
     protected function getOptions()
     {
-
-        return array(
-            array(
+        return [
+            [
                 'directory',
                 'd',
                 InputOption::VALUE_OPTIONAL,
                 'transformer store directory (relative to App\)',
                 null,
-            ),
-            array(
+            ],
+            [
                 'namespace',
                 'ns',
                 InputOption::VALUE_OPTIONAL,
                 'transformer namespace',
                 null,
-            ),
-            array(
+            ],
+            [
                 'model',
                 'm',
                 InputOption::VALUE_OPTIONAL,
                 'model to get dump to transformer class',
                 null,
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -205,10 +196,9 @@ class TransformerGeneratorCommand extends Command
 
             $class = basename($class);
 
-            $namespace = rtrim(str_replace('/', '\\', $namespace . "\\{$additionalLevel}"), '\\');
+            $namespace = rtrim(str_replace('/', '\\', $namespace."\\{$additionalLevel}"), '\\');
 
-            $storePath = str_replace('//', '/', rtrim($storePath, '/') . "/{$additionalLevel}");
-
+            $storePath = str_replace('//', '/', rtrim($storePath, '/')."/{$additionalLevel}");
         }
 
         return [
@@ -232,13 +222,11 @@ class TransformerGeneratorCommand extends Command
         $classNamespace = "\\{$namespace}\\{$class}";
 
         if (class_exists($classNamespace)) {
-
             $model = new \ReflectionClass($classNamespace);
 
             if ($model->isSubclassOf('Illuminate\Database\Eloquent\Model')) {
-
                 $mdl = $this->app->make($classNamespace);
-                $table = $mdl->getConnection()->getTablePrefix() . $mdl->getTable();
+                $table = $mdl->getConnection()->getTablePrefix().$mdl->getTable();
                 $schema = $mdl->getConnection()->getDoctrineSchemaManager($table);
 
                 $database = null;
@@ -250,7 +238,6 @@ class TransformerGeneratorCommand extends Command
 
 
                 foreach ($columns as $column) {
-
                     if ($column->getType() instanceof \Doctrine\DBAL\Types\JsonArrayType) {
                         continue;
                     }
@@ -258,14 +245,11 @@ class TransformerGeneratorCommand extends Command
                     $castTo = $this->getCasting($column->getType());
 
                     $attributes[] = ['column' => $column->getName(), 'casts' => $castTo];
-
                 }
 
                 return $attributes;
             }
-
         } else {
-
             $this->error("Your model {$class} was not found in {$namespace}\\ \r\nIf this is the first time you get this message, try to update /config/fractal.php to make changes to model_namespace accordingly.");
             exit();
         }
@@ -277,7 +261,7 @@ class TransformerGeneratorCommand extends Command
     }
 
     /**
-     * get value cast type
+     * get value cast type.
      *
      * @param $type
      *
@@ -285,31 +269,20 @@ class TransformerGeneratorCommand extends Command
      */
     private function getCasting($type)
     {
-
-        if ($type instanceof \Doctrine\DBAL\Types\DecimalType OR $type instanceof
+        if ($type instanceof \Doctrine\DBAL\Types\DecimalType or $type instanceof
             \Doctrine\DBAL\Types\FloatType
         ) {
-
             return 'double';
-
         } else {
             if ($type instanceof \Doctrine\DBAL\Types\BooleanType) {
-
                 return 'bool';
-
             } else {
-                if ($type instanceof \Doctrine\DBAL\Types\IntegerType OR $type instanceof \Doctrine\DBAL\Types\BigIntType OR $type instanceof
+                if ($type instanceof \Doctrine\DBAL\Types\IntegerType or $type instanceof \Doctrine\DBAL\Types\BigIntType or $type instanceof
                     \Doctrine\DBAL\Types\SmallIntType
                 ) {
-
                     return 'int';
-
                 }
             }
         }
-
-        return null;
     }
-
-
 }

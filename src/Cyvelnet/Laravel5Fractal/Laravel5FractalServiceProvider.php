@@ -1,4 +1,6 @@
-<?php namespace Cyvelnet\Laravel5Fractal;
+<?php
+
+namespace Cyvelnet\Laravel5Fractal;
 
 use Cyvelnet\Laravel5Fractal\Commands\TransformerGeneratorCommand;
 use Illuminate\Support\ServiceProvider;
@@ -6,7 +8,6 @@ use League\Fractal\Manager;
 
 class Laravel5FractalServiceProvider extends ServiceProvider
 {
-
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -21,10 +22,10 @@ class Laravel5FractalServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $source_config = __DIR__ . '/../../config/fractal.php';
+        $source_config = __DIR__.'/../../config/fractal.php';
         $this->publishes([$source_config => 'config/fractal.php'], 'config');
 
-        $this->loadViewsFrom(__DIR__ . '/../../views', 'fractal');
+        $this->loadViewsFrom(__DIR__.'/../../views', 'fractal');
     }
 
     /**
@@ -34,7 +35,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $source_config = __DIR__ . '/../../config/fractal.php';
+        $source_config = __DIR__.'/../../config/fractal.php';
         $this->mergeConfigFrom($source_config, 'fractal');
 
         $this->app->singleton('fractal', function ($app) {
@@ -51,17 +52,16 @@ class Laravel5FractalServiceProvider extends ServiceProvider
             $factalNamespace = 'League\\Fractal\\Serializer\\';
 
 
-            $loadSerializer = (class_exists($factalNamespace . $serializer)) ?
-                $factalNamespace . $serializer : $serializer;
+            $loadSerializer = (class_exists($factalNamespace.$serializer)) ?
+                $factalNamespace.$serializer : $serializer;
 
-            $manager->setSerializer(new $loadSerializer);
+            $manager->setSerializer(new $loadSerializer());
 
-            if ($autoload === true AND $includes = $app['request']->input($input_key)) {
+            if ($autoload === true and $includes = $app['request']->input($input_key)) {
                 $manager->parseIncludes($includes);
             }
 
             if ($app['request']->has($exclude_key)) {
-
                 $manager->parseExcludes($app['request']->input($exclude_key));
             }
 
@@ -78,7 +78,6 @@ class Laravel5FractalServiceProvider extends ServiceProvider
             }
         );
         $this->commands('command.transformer.generate');
-
     }
 
     /**
@@ -90,5 +89,4 @@ class Laravel5FractalServiceProvider extends ServiceProvider
     {
         return ['fractal', 'command.transformer.generate'];
     }
-
 }

@@ -1,10 +1,11 @@
-<?php namespace Cyvelnet\Laravel5Fractal\Facades;
+<?php
+
+namespace Cyvelnet\Laravel5Fractal\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Fractal
- * @package Cyvelnet\Laravel5Fractal\Facades
+ * Class Fractal.
  */
 class Fractal extends Facade
 {
@@ -15,5 +16,4 @@ class Fractal extends Facade
     {
         return 'fractal';
     }
-
 }

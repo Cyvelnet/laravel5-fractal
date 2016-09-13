@@ -1,8 +1,9 @@
-<?php namespace Cyvelnet\Laravel5Fractal;
+<?php
+
+namespace Cyvelnet\Laravel5Fractal;
 
 use Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter;
 use Illuminate\Contracts\Container\Container;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Pagination\LengthAwarePaginator;
 use League\Fractal\Manager;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -10,16 +11,12 @@ use League\Fractal\Pagination\PaginatorInterface;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
 use League\Fractal\Resource\ResourceInterface;
-use League\Fractal\TransformerAbstract;
 
 /**
- * Class FractalServices
- *
- * @package Cyvelnet\Laravel5Fractal
+ * Class FractalServices.
  */
 class FractalServices
 {
-
     /**
      * @var Manager
      */
@@ -43,7 +40,7 @@ class FractalServices
 
 
     /**
-     * @param Manager $manager
+     * @param Manager   $manager
      * @param Container $app
      */
     public function __construct(Manager $manager, Container $app)
@@ -77,11 +74,12 @@ class FractalServices
         }
 
         // when autoload is enable, we need to merge user requested includes with the predefined includes.
-        if ($this->autoload AND $this->request->get($this->input_key)) {
+        if ($this->autoload and $this->request->get($this->input_key)) {
             $includes = array_merge($includes, explode(',', $this->request->get($this->input_key)));
         }
 
         $this->manager->parseIncludes($includes);
+
         return $this;
     }
 
@@ -94,13 +92,12 @@ class FractalServices
      */
     public function excludes($excludes)
     {
-
         if (is_string($excludes)) {
             $excludes = explode(',', $excludes);
         }
 
         // when autoload is enable, we need to merge user requested includes with the predefined includes.
-        if ($this->autoload AND $this->request->get($this->exclude_key)) {
+        if ($this->autoload and $this->request->get($this->exclude_key)) {
             $excludes = array_merge($excludes, explode(',', $this->request->get($this->exclude_key)));
         }
 
@@ -110,7 +107,7 @@ class FractalServices
     }
 
     /**
-     * set data transformation recursion limit
+     * set data transformation recursion limit.
      *
      * @param $limit
      *
@@ -124,7 +121,7 @@ class FractalServices
     }
 
     /**
-     * set data serializer
+     * set data serializer.
      *
      * @param \League\Fractal\Serializer\SerializerAbstract $serializer
      *
@@ -133,15 +130,16 @@ class FractalServices
     public function setSerializer(\League\Fractal\Serializer\SerializerAbstract $serializer)
     {
         $this->manager->setSerializer($serializer);
+
         return $this;
     }
 
     /**
-     * transform item
+     * transform item.
      *
      * @param $item
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null $resourceKey
+     * @param null                                                  $resourceKey
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
@@ -153,12 +151,12 @@ class FractalServices
     }
 
     /**
-     * transform a collection
+     * transform a collection.
      *
      * @param $items
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null $resourceKey
-     * @param PaginatorInterface $adapter
+     * @param null                                                  $resourceKey
+     * @param PaginatorInterface                                    $adapter
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
@@ -173,11 +171,12 @@ class FractalServices
         if ($items instanceof LengthAwarePaginator) {
             $this->withPaginator($items, $resources, $adapter);
         }
+
         return $this->scope($resources);
     }
 
     /**
-     * return result scope
+     * return result scope.
      *
      * @param ResourceInterface $resource
      *
@@ -189,7 +188,7 @@ class FractalServices
     }
 
     /**
-     * set a paginator meta when a paginator instance detected
+     * set a paginator meta when a paginator instance detected.
      *
      * @param $items
      * @param $resources
@@ -201,5 +200,4 @@ class FractalServices
 
         $resources->setPaginator($adapter);
     }
-
 }

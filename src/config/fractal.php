@@ -72,7 +72,7 @@ return [
     | * you are required to provide full namespace for custom serializer
     |
     */
-    'serializer'  => env('FRACTAL_SERIALIZER', 'ArraySerializer') // DataArraySerializer,JsonApiSerializer, ArraySerializer
+    'serializer'  => env('FRACTAL_SERIALIZER', 'ArraySerializer'), // DataArraySerializer,JsonApiSerializer, ArraySerializer
 
 
 ];
