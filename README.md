@@ -1,9 +1,20 @@
+[![StyleCI](https://styleci.io/repos/32406904/shield)](https://styleci.io/repos/32406904)
+[![Build Status](https://travis-ci.org/Cyvelnet/laravel5-fractal.svg?branch=2.0-dev)](https://travis-ci.org/Cyvelnet/laravel5-fractal)
+[![Total Downloads](https://poser.pugx.org/cyvelnet/laravel5-fractal/downloads)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+[![Latest Stable Version](https://poser.pugx.org/cyvelnet/laravel5-fractal/v/stable)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+[![Latest Unstable Version](https://poser.pugx.org/cyvelnet/laravel5-fractal/v/unstable)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+[![License](https://poser.pugx.org/cyvelnet/laravel5-fractal/license)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+
 # laravel5-fractal
 A simple fractal service provider and transformer generator for laravel 5 and lumen
 
 <sup>welcome to my first laravel package, lets rock.<sup>
 
-### New: Since version 1.2 auto class aliase has been removed.
+### New: Since version 2.0
+* No longer require to call getArray(), getJson() or responseJson()
+* `make:transformer UserTransformer -m User` Eloquent model attributes generation.
+* `make:transformer Admin/UserTransformer` command now support child directory with namespace generation
+* support excludes() child resources.
 
 Require this package with composer using the following command:
 
@@ -51,7 +62,7 @@ Now you can start using this package with the following simple command
 ````php
 $user = User::find(1);
 
-return Fractal::item($user, new UserTransformer)->responseJson(200);
+return Fractal::item($user, new UserTransformer);
 ````
 
 OR
@@ -59,7 +70,7 @@ OR
 ````php
 $users = User::get(); // $users = User::paginate();
 
-return Fractal::collection($users, new UserTransformer)->responseJson(200);
+return Fractal::collection($users, new UserTransformer);
 ````
 
 You will automatically gain some extra attributes when you passing a laravel's paginator object.
@@ -89,6 +100,12 @@ public function transform($user)
            ...
            ];
 }
+````
+
+####Since version 2.0, you may enjoy attributes generation transformer with your Eloquent model
+
+````bash
+php artisan make:transformer UserTransformer -m User
 ````
 
 You can also publish the config-file to change implementations to suits you.

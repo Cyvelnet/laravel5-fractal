@@ -1,11 +1,12 @@
-<?php namespace Cyvelnet\Laravel5Fractal\Paginators;
+<?php
+
+namespace Cyvelnet\Laravel5Fractal\Paginators;
 
 use Illuminate\Pagination\LengthAwarePaginator;
 use League\Fractal\Pagination\PaginatorInterface;
 
 /**
  * A paginator adapter for illuminate/pagination/LengthAwarePaginator.
- *
  */
 class IlluminateLengthAwarePaginatorAdapter implements PaginatorInterface
 {

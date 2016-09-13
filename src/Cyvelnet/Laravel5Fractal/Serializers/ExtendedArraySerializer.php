@@ -5,15 +5,11 @@ namespace Cyvelnet\Laravel5Fractal\Serializers;
 use League\Fractal\Pagination\PaginatorInterface;
 use League\Fractal\Serializer\ArraySerializer;
 
-
 /**
- * Class ExtendedArraySerializer
- *
- * @package Cyvelnet\Laravel5Fractal\Serializers
+ * Class ExtendedArraySerializer.
  */
 class ExtendedArraySerializer extends ArraySerializer
 {
-
     /**
      * Serialize the paginator.
      *
@@ -23,18 +19,18 @@ class ExtendedArraySerializer extends ArraySerializer
      */
     public function paginator(PaginatorInterface $paginator)
     {
-        $currentPage = (int)$paginator->getCurrentPage();
-        $lastPage = (int)$paginator->getLastPage();
+        $currentPage = (int) $paginator->getCurrentPage();
+        $lastPage = (int) $paginator->getLastPage();
 
-        $pagination = array(
-            'total'        => (int)$paginator->getTotal(),
-            'count'        => (int)$paginator->getCount(),
-            'per_page'     => (int)$paginator->getPerPage(),
+        $pagination = [
+            'total'        => (int) $paginator->getTotal(),
+            'count'        => (int) $paginator->getCount(),
+            'per_page'     => (int) $paginator->getPerPage(),
             'current_page' => $currentPage,
             'total_pages'  => $lastPage,
-        );
+        ];
 
-        $pagination['links'] = array();
+        $pagination['links'] = [];
 
         if ($currentPage !== 1) {
             $pagination['links']['first'] = $paginator->getUrl(1);
@@ -60,11 +56,10 @@ class ExtendedArraySerializer extends ArraySerializer
 
 
         if ($lastPage > 1 && $currentPage !== $lastPage) {
-
             $pagination['links']['last'] = $paginator->getUrl($lastPage);
         }
 
 
-        return array('pagination' => $pagination);
+        return ['pagination' => $pagination];
     }
 }
