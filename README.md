@@ -5,7 +5,8 @@ A simple fractal service provider and transformer generator for laravel 5 and lu
 
 ### New: Since version 2.0
 * No longer require to call getArray(), getJson() or responseJson()
-* Eloquent model attributes generation.
+* `make:transformer UserTransformer -m User` Eloquent model attributes generation.
+* `make:transformer Admin/UserTransformer` command now support child directory with namespace generation
 
 Require this package with composer using the following command:
 
