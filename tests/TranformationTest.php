@@ -14,7 +14,6 @@ class TranformationTest extends Orchestra\Testbench\TestCase
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
 
-
     public function test_parameter_excludes()
     {
         $service = $this->getService();
@@ -24,7 +23,6 @@ class TranformationTest extends Orchestra\Testbench\TestCase
         $this->assertFalse(isset($data['data'][0]['orders']));
     }
 
-
     public function test_default_includes()
     {
         $service = $this->getService();
@@ -33,7 +31,6 @@ class TranformationTest extends Orchestra\Testbench\TestCase
 
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
-
 
     public function test_includes_with_data()
     {
@@ -54,7 +51,6 @@ class TranformationTest extends Orchestra\Testbench\TestCase
             ],
         ], $data);
     }
-
 
     public function test_excludes_with_data()
     {

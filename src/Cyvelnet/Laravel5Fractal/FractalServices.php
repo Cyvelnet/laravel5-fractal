@@ -38,7 +38,6 @@ class FractalServices
      */
     private $exclude_key;
 
-
     /**
      * @param Manager   $manager
      * @param Container $app
