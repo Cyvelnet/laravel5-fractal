@@ -36,7 +36,22 @@ use League\Fractal\Resource\Item;
     {
         return [
 
-            'id' => $resource->id,
+            <?php
+                foreach ($attributes as $attribute){
+
+
+                    if($attribute['casts'])
+                    {
+                        echo "'{$attribute['column']}' => ({$attribute['casts']}) \$resource->{$attribute['column']},\r\n\t\t\t";
+
+                    }else{
+
+                        echo "'{$attribute['column']}' => \$resource->{$attribute['column']},\r\n\t\t\t";
+
+                    }
+                }
+
+            ?>
 
         ];
     }

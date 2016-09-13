@@ -74,7 +74,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
 
         $this->app['command.transformer.generate'] = $this->app->share(
             function ($app) {
-                return new TransformerGeneratorCommand($app['config'], $app['view'], $app['files']);
+                return new TransformerGeneratorCommand($app['config'], $app['view'], $app['files'], $app);
             }
         );
         $this->commands('command.transformer.generate');
