@@ -1,4 +1,9 @@
+[![StyleCI](https://styleci.io/repos/32406904/shield)](https://styleci.io/repos/32406904)
 [![Build Status](https://travis-ci.org/Cyvelnet/laravel5-fractal.svg?branch=2.0-dev)](https://travis-ci.org/Cyvelnet/laravel5-fractal)
+[![Total Downloads](https://poser.pugx.org/cyvelnet/laravel5-fractal/downloads)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+[![Latest Stable Version](https://poser.pugx.org/cyvelnet/laravel5-fractal/v/stable)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+[![Latest Unstable Version](https://poser.pugx.org/cyvelnet/laravel5-fractal/v/unstable)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
+[![License](https://poser.pugx.org/cyvelnet/laravel5-fractal/license)](https://packagist.org/packages/cyvelnet/laravel5-fractal)
 
 # laravel5-fractal
 A simple fractal service provider and transformer generator for laravel 5 and lumen
