@@ -1,17 +1,12 @@
 <?php
 
 /**
- * Class TranformationTest
+ * Class TranformationTest.
  */
 class TranformationTest extends Orchestra\Testbench\TestCase
 {
-
-    /**
-     *
-     */
     public function test_parameter_includes()
     {
-
         $service = $this->getService();
 
         $data = $service->includes('orders')->collection($this->getTestUserData(), new UserTransformerStub())->getArray();
@@ -19,12 +14,9 @@ class TranformationTest extends Orchestra\Testbench\TestCase
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
 
-    /**
-     *
-     */
+
     public function test_parameter_excludes()
     {
-
         $service = $this->getService();
 
         $data = $service->excludes('orders')->collection($this->getTestUserData(), new UserTransformerWithDefaultIncludesStub())->getArray();
@@ -32,12 +24,9 @@ class TranformationTest extends Orchestra\Testbench\TestCase
         $this->assertFalse(isset($data['data'][0]['orders']));
     }
 
-    /**
-     *
-     */
+
     public function test_default_includes()
     {
-
         $service = $this->getService();
 
         $data = $service->collection($this->getTestUserData(), new UserTransformerWithDefaultIncludesStub())->getArray();
@@ -45,9 +34,7 @@ class TranformationTest extends Orchestra\Testbench\TestCase
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
 
-    /**
-     *
-     */
+
     public function test_includes_with_data()
     {
         $service = $this->getService();
@@ -66,12 +53,9 @@ class TranformationTest extends Orchestra\Testbench\TestCase
                 ],
             ],
         ], $data);
-
     }
 
-    /**
-     *
-     */
+
     public function test_excludes_with_data()
     {
         $service = $this->getService();
@@ -88,9 +72,8 @@ class TranformationTest extends Orchestra\Testbench\TestCase
                     'id'   => 2,
                     'name' => 'Bar',
                 ],
-            ]
+            ],
         ], $data);
-
     }
 
     /**

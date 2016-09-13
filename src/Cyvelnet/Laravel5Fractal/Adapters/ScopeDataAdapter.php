@@ -7,13 +7,10 @@ use Illuminate\Contracts\Support\Jsonable;
 use League\Fractal\Scope;
 
 /**
- * Class ScopeDataAdapter
- *
- * @package Cyvelnet\Laravel5Fractal
+ * Class ScopeDataAdapter.
  */
 class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
 {
-
     /**
      * @var Scope
      */
@@ -28,9 +25,9 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
     }
 
     /**
-     * generate a json response
+     * generate a json response.
      *
-     * @param int $http_status
+     * @param int   $http_status
      * @param array $header
      *
      * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
@@ -41,7 +38,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
     }
 
     /**
-     * get the transformed array data
+     * get the transformed array data.
      *
      * @return array
      */
@@ -50,9 +47,8 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
         return $this->scope->toArray();
     }
 
-
     /**
-     * get the transformed json data
+     * get the transformed json data.
      *
      * @return string
      */
@@ -70,6 +66,4 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
     {
         return json_encode($this->scope->toArray(), $options);
     }
-
-
 }
