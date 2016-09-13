@@ -43,6 +43,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
 
             $autoload = $app['config']->get('fractal.autoload');
             $input_key = $app['config']->get('fractal.input_key');
+            $exclude_key = $app['config']->get('fractal.exclude_key');
             $serializer = $app['config']->get('fractal.serializer');
 
             // creating fractal manager instance
@@ -58,6 +59,12 @@ class Laravel5FractalServiceProvider extends ServiceProvider
             if ($autoload === true AND $includes = $app['request']->input($input_key)) {
                 $manager->parseIncludes($includes);
             }
+
+            if ($app['request']->has($exclude_key)) {
+
+                $manager->parseExcludes($app['request']->input($exclude_key));
+            }
+
 
             return new FractalServices($manager, $app['app']);
         });

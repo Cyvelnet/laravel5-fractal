@@ -14,6 +14,7 @@ use League\Fractal\TransformerAbstract;
 
 /**
  * Class FractalServices
+ *
  * @package Cyvelnet\Laravel5Fractal
  */
 class FractalServices
@@ -23,8 +24,22 @@ class FractalServices
      * @var Manager
      */
     private $manager;
+    /**
+     * @var bool
+     */
     private $autoload;
+    /**
+     * @var
+     */
     private $request;
+    /**
+     * @var string
+     */
+    private $input_key;
+    /**
+     * @var string
+     */
+    private $exclude_key;
 
 
     /**
@@ -36,6 +51,7 @@ class FractalServices
         $this->manager = $manager;
         $this->autoload = $app['config']->get('fractal.autoload');
         $this->input_key = $app['config']->get('fractal.input_key');
+        $this->exclude_key = $app['config']->get('fractal.exclude_key');
         $this->request = $app['request'];
     }
 
@@ -49,11 +65,17 @@ class FractalServices
 
     /**
      * includes sub level data transformer.
-     * @param array $includes
+     *
+     * @param string|array $includes
+     *
      * @return $this
      */
-    public function includes(array $includes)
+    public function includes($includes)
     {
+        if (is_string($includes)) {
+            $includes = explode(',', $includes);
+        }
+
         // when autoload is enable, we need to merge user requested includes with the predefined includes.
         if ($this->autoload AND $this->request->get($this->input_key)) {
             $includes = array_merge($includes, explode(',', $this->request->get($this->input_key)));
@@ -64,19 +86,48 @@ class FractalServices
     }
 
     /**
+     * excludes sub level from data transformer.
+     *
+     * @param string|array $excludes
+     *
+     * @return $this
+     */
+    public function excludes($excludes)
+    {
+
+        if (is_string($excludes)) {
+            $excludes = explode(',', $excludes);
+        }
+
+        // when autoload is enable, we need to merge user requested includes with the predefined includes.
+        if ($this->autoload AND $this->request->get($this->exclude_key)) {
+            $excludes = array_merge($excludes, explode(',', $this->request->get($this->exclude_key)));
+        }
+
+        $this->manager->parseExcludes($excludes);
+
+        return $this;
+    }
+
+    /**
      * set data transformation recursion limit
+     *
      * @param $limit
+     *
      * @return $this
      */
     public function setRecursionLimit($limit)
     {
         $this->manager->setRecursionLimit($limit);
+
         return $this;
     }
 
     /**
      * set data serializer
+     *
      * @param \League\Fractal\Serializer\SerializerAbstract $serializer
+     *
      * @return $this
      */
     public function setSerializer(\League\Fractal\Serializer\SerializerAbstract $serializer)
@@ -87,12 +138,14 @@ class FractalServices
 
     /**
      * transform item
+     *
      * @param $item
-     * @param TransformerAbstract $transformer
+     * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
      * @param null $resourceKey
+     *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
-    public function item($item, TransformerAbstract $transformer, $resourceKey = null)
+    public function item($item, $transformer, $resourceKey = null)
     {
         $resource = new Item($item, $transformer, $resourceKey);
 
@@ -101,15 +154,17 @@ class FractalServices
 
     /**
      * transform a collection
+     *
      * @param $items
-     * @param TransformerAbstract $transformer
+     * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
      * @param null $resourceKey
      * @param PaginatorInterface $adapter
+     *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
     public function collection(
         $items,
-        TransformerAbstract $transformer,
+        $transformer,
         $resourceKey = null,
         PaginatorInterface $adapter = null
     ) {
@@ -123,7 +178,9 @@ class FractalServices
 
     /**
      * return result scope
+     *
      * @param ResourceInterface $resource
+     *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
     private function scope(ResourceInterface $resource)
@@ -133,6 +190,7 @@ class FractalServices
 
     /**
      * set a paginator meta when a paginator instance detected
+     *
      * @param $items
      * @param $resources
      * @param $adapter
@@ -140,6 +198,7 @@ class FractalServices
     private function withPaginator($items, &$resources, $adapter)
     {
         $adapter = new IlluminatePaginatorAdapter($items);
+
         $resources->setPaginator($adapter);
     }
 

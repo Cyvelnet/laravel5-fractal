@@ -36,7 +36,7 @@ use League\Fractal\Resource\Item;
     {
         return [
 
-        'id' => $resource->id,
+            'id' => $resource->id,
 
         ];
     }
