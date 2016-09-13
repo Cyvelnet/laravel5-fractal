@@ -58,11 +58,11 @@ class TranformationTest extends Orchestra\Testbench\TestCase
             'data' => [
                 [
                     'id'   => 1,
-                    'name' => 'foo',
+                    'name' => 'Foo',
                 ],
                 [
                     'id'   => 2,
-                    'name' => 'bar',
+                    'name' => 'Bar',
                 ],
             ],
         ], $data);
