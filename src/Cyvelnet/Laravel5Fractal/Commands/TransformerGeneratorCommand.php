@@ -221,43 +221,40 @@ class TransformerGeneratorCommand extends Command
 
         $classNamespace = "\\{$namespace}\\{$class}";
 
-       if ($class)
-       {
+        if ($class) {
+            if (class_exists($classNamespace)) {
+                $model = new \ReflectionClass($classNamespace);
 
-           if (class_exists($classNamespace)) {
-               $model = new \ReflectionClass($classNamespace);
+                if ($model->isSubclassOf('Illuminate\Database\Eloquent\Model')) {
+                    $mdl = $this->app->make($classNamespace);
+                    $table = $mdl->getConnection()->getTablePrefix().$mdl->getTable();
+                    $schema = $mdl->getConnection()->getDoctrineSchemaManager($table);
 
-               if ($model->isSubclassOf('Illuminate\Database\Eloquent\Model')) {
-                   $mdl = $this->app->make($classNamespace);
-                   $table = $mdl->getConnection()->getTablePrefix().$mdl->getTable();
-                   $schema = $mdl->getConnection()->getDoctrineSchemaManager($table);
+                    $database = null;
+                    if (strpos($table, '.')) {
+                        list($database, $table) = explode('.', $table);
+                    }
 
-                   $database = null;
-                   if (strpos($table, '.')) {
-                       list($database, $table) = explode('.', $table);
-                   }
-
-                   $columns = Arr::except($schema->listTableColumns($table, $database), $mdl->getHidden());
+                    $columns = Arr::except($schema->listTableColumns($table, $database), $mdl->getHidden());
 
 
-                   foreach ($columns as $column) {
-                       if ($column->getType() instanceof \Doctrine\DBAL\Types\JsonArrayType) {
-                           continue;
-                       }
+                    foreach ($columns as $column) {
+                        if ($column->getType() instanceof \Doctrine\DBAL\Types\JsonArrayType) {
+                            continue;
+                        }
 
-                       $castTo = $this->getCasting($column->getType());
+                        $castTo = $this->getCasting($column->getType());
 
-                       $attributes[] = ['column' => $column->getName(), 'casts' => $castTo];
-                   }
+                        $attributes[] = ['column' => $column->getName(), 'casts' => $castTo];
+                    }
 
-                   return $attributes;
-               }
-           } else {
-               $this->error("Your model {$class} was not found in {$namespace}\\ \r\nIf this is the first time you get this message, try to update /config/fractal.php to make changes to model_namespace accordingly.");
-               exit();
-           }
-
-       }
+                    return $attributes;
+                }
+            } else {
+                $this->error("Your model {$class} was not found in {$namespace}\\ \r\nIf this is the first time you get this message, try to update /config/fractal.php to make changes to model_namespace accordingly.");
+                exit();
+            }
+        }
 
         // use as a default attribute
         return [
