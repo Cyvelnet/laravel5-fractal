@@ -3,37 +3,37 @@
 namespace Cyvelnet\Laravel5Fractal\Adapters;
 
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 use League\Fractal\Scope;
 
 /**
  * Class ScopeResponse
+ *
  * @package Cyvelnet\Laravel5Fractal
  */
-class ScopeDataAdapter implements ScopeDataAdapterInterface
+class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
 {
-
 
     /**
      * @var Scope
      */
     private $scope;
-    /**
-     * @var ResponseFactory
-     */
-    private $response;
 
     /**
      * @param Scope $scope
      */
-    function __construct(Scope $scope)
+    public function __construct(Scope $scope)
     {
         $this->scope = $scope;
     }
 
     /**
      * generate a json response
+     *
      * @param int $http_status
      * @param array $header
+     *
      * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function responseJson($http_status = 200, $header = [])
@@ -43,6 +43,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
 
     /**
      * get the transformed array data
+     *
      * @return array
      */
     public function getArray()
@@ -53,11 +54,23 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface
 
     /**
      * get the transformed json data
+     *
      * @return string
      */
     public function getJson()
     {
         return $this->scope->toJson();
     }
+
+    /**
+     * @param int $options
+     *
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->scope->toArray(), $options);
+    }
+
 
 }
