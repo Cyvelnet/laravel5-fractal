@@ -5,7 +5,6 @@ namespace Cyvelnet\Laravel5Fractal\Commands;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem as File;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Arr;
 use Illuminate\View\Factory as View;
 use Symfony\Component\Console\Input\InputArgument;
@@ -50,9 +49,9 @@ class TransformerGeneratorCommand extends Command
      * @param \Illuminate\Config\Repository      $config
      * @param View                               $view
      * @param \Illuminate\Filesystem\Filesystem  $filesystem
-     * @param \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Foundation\Application|\Laravel\Lumen\Application $app
      */
-    public function __construct(Config $config, View $view, File $filesystem, Application $app)
+    public function __construct(Config $config, View $view, File $filesystem, $app)
     {
         parent::__construct();
         $this->config = $config;
