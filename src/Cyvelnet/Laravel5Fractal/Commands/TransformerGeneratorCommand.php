@@ -41,7 +41,7 @@ class TransformerGeneratorCommand extends Command
      */
     private $filesystem;
     /**
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Foundation\Application|\Laravel\Lumen\Application $app
      */
     private $app;
 
