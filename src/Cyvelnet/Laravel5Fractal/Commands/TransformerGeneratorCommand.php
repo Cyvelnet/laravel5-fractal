@@ -41,14 +41,14 @@ class TransformerGeneratorCommand extends Command
      */
     private $filesystem;
     /**
-     * @var \Illuminate\Foundation\Application|\Laravel\Lumen\Application $app
+     * @var \Illuminate\Foundation\Application|\Laravel\Lumen\Application
      */
     private $app;
 
     /**
-     * @param \Illuminate\Config\Repository      $config
-     * @param View                               $view
-     * @param \Illuminate\Filesystem\Filesystem  $filesystem
+     * @param \Illuminate\Config\Repository                                 $config
+     * @param View                                                          $view
+     * @param \Illuminate\Filesystem\Filesystem                             $filesystem
      * @param \Illuminate\Foundation\Application|\Laravel\Lumen\Application $app
      */
     public function __construct(Config $config, View $view, File $filesystem, $app)
@@ -116,7 +116,6 @@ class TransformerGeneratorCommand extends Command
             // loading transformers template from views
             $view = $this->view->make('fractal::transformer',
                 ['namespace' => $namespace, 'class_name' => $class, 'attributes' => $transformerAttrs]);
-
 
             if ($create) {
                 $this->filesystem->put("{$directory}/{$class}.php", $view->render());
@@ -235,7 +234,6 @@ class TransformerGeneratorCommand extends Command
                     }
 
                     $columns = Arr::except($schema->listTableColumns($table, $database), $mdl->getHidden());
-
 
                     foreach ($columns as $column) {
                         if ($column->getType() instanceof \Doctrine\DBAL\Types\JsonArrayType) {

@@ -54,11 +54,9 @@ class ExtendedArraySerializer extends ArraySerializer
             $pagination['links']['fastforward'] = $paginator->getUrl($fastForward);
         }
 
-
         if ($lastPage > 1 && $currentPage !== $lastPage) {
             $pagination['links']['last'] = $paginator->getUrl($lastPage);
         }
-
 
         return ['pagination' => $pagination];
     }

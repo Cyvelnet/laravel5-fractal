@@ -51,7 +51,6 @@ class Laravel5FractalServiceProvider extends ServiceProvider
             $manager = new Manager();
             $factalNamespace = 'League\\Fractal\\Serializer\\';
 
-
             $loadSerializer = (class_exists($factalNamespace.$serializer)) ?
                 $factalNamespace.$serializer : $serializer;
 
@@ -65,7 +64,6 @@ class Laravel5FractalServiceProvider extends ServiceProvider
                 $manager->parseExcludes($app['request']->input($exclude_key));
             }
 
-
             return new FractalServices($manager, $app['app']);
         });
         $this->app->alias('fractal', FractalServices::class);
@@ -74,7 +72,7 @@ class Laravel5FractalServiceProvider extends ServiceProvider
         $this->app->singleton('command.transformer.generate', function ($app) {
             return new TransformerGeneratorCommand($app['config'], $app['view'], $app['files'], $app);
         });
-        
+
         $this->commands('command.transformer.generate');
     }
 
