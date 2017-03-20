@@ -74,5 +74,4 @@ return [
     */
     'serializer'  => env('FRACTAL_SERIALIZER', 'ArraySerializer'), // DataArraySerializer,JsonApiSerializer, ArraySerializer
 
-
 ];
