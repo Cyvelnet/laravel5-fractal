@@ -26,5 +26,17 @@
             "Cyvelnet\\Laravel5Fractal\\": "src/"
         }
     },
+    {
+    "extra":{
+        "laravel":{
+            "providers":[
+                "Cyvelnet\\Laravel5Fractal\\Laravel5FractalServiceProvider"
+            ],
+            "aliases":{
+                "Fractal":"Cyvelnet\\Laravel5Fractal\\Facades\\Fractal"
+            }
+        }
+    }
+}
     "minimum-stability": "stable"
 }
