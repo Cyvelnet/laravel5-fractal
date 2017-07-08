@@ -62,119 +62,24 @@ class FractalServices
     }
 
     /**
-     * @return mixed
-     */
-    public function getManager()
-    {
-        return $this->manager;
-    }
-
-    /**
-     * includes sub level data transformer.
+     * add additional meta data to transformed data
      *
-     * @param string|array $includes
+     * @param $key
+     * @param $data
      *
      * @return $this
      */
-    public function includes($includes)
+    public function addMeta($key, $data = null)
     {
-        if (is_string($includes)) {
-            $includes = explode(',', $includes);
+        if (is_array($key)) {
+
+            $this->meta += $key;
+
+        } else {
+            $this->meta[$key] = $data;
         }
 
-        // when autoload is enable, we need to merge user requested includes with the predefined includes.
-        if ($this->autoload and $this->request->get($this->input_key)) {
-            $includes = array_merge($includes, explode(',', $this->request->get($this->input_key)));
-        }
-
-        $this->manager->parseIncludes($includes);
-
         return $this;
-    }
-
-    /**
-     * excludes sub level from data transformer.
-     *
-     * @param string|array $excludes
-     *
-     * @return $this
-     */
-    public function excludes($excludes)
-    {
-        if (is_string($excludes)) {
-            $excludes = explode(',', $excludes);
-        }
-
-        // when autoload is enable, we need to merge user requested includes with the predefined includes.
-        if ($this->autoload and $this->request->get($this->exclude_key)) {
-            $excludes = array_merge($excludes, explode(',', $this->request->get($this->exclude_key)));
-        }
-
-        $this->manager->parseExcludes($excludes);
-
-        return $this;
-    }
-
-    /**
-     * set data transformation recursion limit.
-     *
-     * @param $limit
-     *
-     * @return $this
-     */
-    public function setRecursionLimit($limit)
-    {
-        $this->manager->setRecursionLimit($limit);
-
-        return $this;
-    }
-
-    /**
-     * set data serializer.
-     *
-     * @param \League\Fractal\Serializer\SerializerAbstract $serializer
-     *
-     * @return $this
-     */
-    public function setSerializer(\League\Fractal\Serializer\SerializerAbstract $serializer)
-    {
-        $this->manager->setSerializer($serializer);
-
-        return $this;
-    }
-
-    /**
-     * Parse field parameter.
-     *
-     * @param array $fieldsets Array of fields to include. It must be an array
-     *                         whose keys are resource types and values a string
-     *                         of the fields to return, separated by a comma
-     * @param array $fieldsets
-     *
-     * @return $this
-     */
-    public function fieldsets(array $fieldsets = [])
-    {
-        $this->fieldsets = $fieldsets;
-        return $this;
-    }
-
-    /**
-     * transform item.
-     *
-     * @param $item
-     * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null $resourceKey
-     *
-     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
-     */
-    public function item($item, $transformer, $resourceKey = null)
-    {
-        $resource = new Item($item, $transformer, $resourceKey);
-
-        $this->applyMetaValue($resource);
-
-        return $this->scope($resource);
     }
 
     /**
@@ -211,24 +116,126 @@ class FractalServices
     }
 
     /**
-     * add additional meta data to transformed data
+     * excludes sub level from data transformer.
      *
-     * @param $key
-     * @param $data
+     * @param string|array $excludes
      *
      * @return $this
      */
-    public function addMeta($key, $data = null)
+    public function excludes($excludes)
     {
-        if (is_array($key)) {
-
-            $this->meta += $key;
-
-        } else {
-            $this->meta[$key] = $data;
+        if (is_string($excludes)) {
+            $excludes = explode(',', $excludes);
         }
 
+        // when autoload is enable, we need to merge user requested includes with the predefined includes.
+        if ($this->autoload and $this->request->get($this->exclude_key)) {
+            $excludes = array_merge($excludes, explode(',', $this->request->get($this->exclude_key)));
+        }
+
+        $this->manager->parseExcludes($excludes);
+
         return $this;
+    }
+
+    /**
+     * Parse field parameter.
+     *
+     * @param array $fieldsets Array of fields to include. It must be an array
+     *                         whose keys are resource types and values a string
+     *                         of the fields to return, separated by a comma
+     * @param array $fieldsets
+     *
+     * @return $this
+     */
+    public function fieldsets(array $fieldsets = [])
+    {
+        $this->fieldsets = $fieldsets;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getManager()
+    {
+        return $this->manager;
+    }
+
+    /**
+     * includes sub level data transformer.
+     *
+     * @param string|array $includes
+     *
+     * @return $this
+     */
+    public function includes($includes)
+    {
+        if (is_string($includes)) {
+            $includes = explode(',', $includes);
+        }
+
+        // when autoload is enable, we need to merge user requested includes with the predefined includes.
+        if ($this->autoload and $this->request->get($this->input_key)) {
+            $includes = array_merge($includes, explode(',', $this->request->get($this->input_key)));
+        }
+
+        $this->manager->parseIncludes($includes);
+
+        return $this;
+    }
+
+    /**
+     * transform item.
+     *
+     * @param $item
+     * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
+     * @param null $resourceKey
+     *
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
+     */
+    public function item($item, $transformer, $resourceKey = null)
+    {
+        $resource = new Item($item, $transformer, $resourceKey);
+
+        $this->applyMetaValue($resource);
+
+        return $this->scope($resource);
+    }
+
+    /**
+     * set data transformation recursion limit.
+     *
+     * @param $limit
+     *
+     * @return $this
+     */
+    public function setRecursionLimit($limit)
+    {
+        $this->manager->setRecursionLimit($limit);
+
+        return $this;
+    }
+
+    /**
+     * set data serializer.
+     *
+     * @param \League\Fractal\Serializer\SerializerAbstract $serializer
+     *
+     * @return $this
+     */
+    public function setSerializer(\League\Fractal\Serializer\SerializerAbstract $serializer)
+    {
+        $this->manager->setSerializer($serializer);
+
+        return $this;
+    }
+
+
+    private function applyMetaValue($resource)
+    {
+        $resource->setMeta($this->meta);
+
     }
 
     /**
@@ -255,9 +262,4 @@ class FractalServices
         $resources->setPaginator($adapter);
     }
 
-    private function applyMetaValue($resource)
-    {
-        $resource->setMeta($this->meta);
-
-    }
 }
