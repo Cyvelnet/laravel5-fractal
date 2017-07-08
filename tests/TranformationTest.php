@@ -1,5 +1,5 @@
 <?php
-use League\Fractal\Serializer\JsonApiSerializer;
+
 
 /**
  * Class TranformationTest.
@@ -96,10 +96,8 @@ class TranformationTest extends TestCase
                 ],
             ],
             'meta' => [
-                'foo' => 'bar'
-            ]
+                'foo' => 'bar',
+            ],
         ], $data);
     }
-
-
 }

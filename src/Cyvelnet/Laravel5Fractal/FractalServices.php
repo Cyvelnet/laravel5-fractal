@@ -49,7 +49,7 @@ class FractalServices
     private $fieldsets = [];
 
     /**
-     * @param Manager $manager
+     * @param Manager   $manager
      * @param Container $app
      */
     public function __construct(Manager $manager, Container $app)
@@ -62,7 +62,7 @@ class FractalServices
     }
 
     /**
-     * add additional meta data to transformed data
+     * add additional meta data to transformed data.
      *
      * @param $key
      * @param $data
@@ -72,9 +72,7 @@ class FractalServices
     public function addMeta($key, $data = null)
     {
         if (is_array($key)) {
-
             $this->meta += $key;
-
         } else {
             $this->meta[$key] = $data;
         }
@@ -87,8 +85,8 @@ class FractalServices
      *
      * @param $items
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null $resourceKey
-     * @param PaginatorInterface $adapter
+     * @param null                                                  $resourceKey
+     * @param PaginatorInterface                                    $adapter
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
@@ -107,7 +105,6 @@ class FractalServices
         }
 
         if ($items instanceof LengthAwarePaginator) {
-
             $adapter = new IlluminatePaginatorAdapter($items);
             $this->withPaginator($resources, $adapter);
         }
@@ -151,6 +148,7 @@ class FractalServices
     public function fieldsets(array $fieldsets = [])
     {
         $this->fieldsets = $fieldsets;
+
         return $this;
     }
 
@@ -190,7 +188,7 @@ class FractalServices
      *
      * @param $item
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null $resourceKey
+     * @param null                                                  $resourceKey
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
@@ -231,11 +229,9 @@ class FractalServices
         return $this;
     }
 
-
     private function applyMetaValue($resource)
     {
         $resource->setMeta($this->meta);
-
     }
 
     /**
@@ -261,5 +257,4 @@ class FractalServices
     {
         $resources->setPaginator($adapter);
     }
-
 }

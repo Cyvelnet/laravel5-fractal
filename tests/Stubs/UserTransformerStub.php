@@ -40,12 +40,12 @@ class UserTransformerStub extends TransformerAbstract
     {
         $orders = [
             [
-                'id' => 1,
+                'id'   => 1,
                 'item' => 'item 1',
                 'qty'  => 100,
             ],
             [
-                'id' => 2,
+                'id'   => 2,
                 'item' => 'item 2',
                 'qty'  => 200,
             ],

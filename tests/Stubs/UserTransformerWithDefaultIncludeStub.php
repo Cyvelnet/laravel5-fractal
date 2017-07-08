@@ -23,6 +23,7 @@ class UserTransformerWithDefaultIncludesStub extends TransformerAbstract
      * Transform object into a generic array.
      *
      * @var
+     *
      * @return array
      */
     public function transform($resource)
