@@ -3,7 +3,6 @@
 
 class TestCase extends Orchestra\Testbench\TestCase
 {
-
     /**
      * @return \Cyvelnet\Laravel5Fractal\FractalServices
      */
@@ -21,12 +20,12 @@ class TestCase extends Orchestra\Testbench\TestCase
             [
                 'id'    => 1,
                 'name'  => 'Foo',
-                'email' => 'foo@gmail.com'
+                'email' => 'foo@gmail.com',
             ],
             [
                 'id'    => 2,
                 'name'  => 'Bar',
-                'email' => 'var@gmail.com'
+                'email' => 'var@gmail.com',
             ],
         ];
     }
