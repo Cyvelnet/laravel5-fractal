@@ -1,15 +1,17 @@
 <?php
+use League\Fractal\Serializer\JsonApiSerializer;
 
 /**
  * Class TranformationTest.
  */
-class TranformationTest extends Orchestra\Testbench\TestCase
+class TranformationTest extends TestCase
 {
     public function test_parameter_includes()
     {
         $service = $this->getService();
 
-        $data = $service->includes('orders')->collection($this->getTestUserData(), new UserTransformerStub())->getArray();
+        $data = $service->includes('orders')->collection($this->getTestUserData(),
+            new UserTransformerStub())->getArray();
 
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
@@ -18,7 +20,8 @@ class TranformationTest extends Orchestra\Testbench\TestCase
     {
         $service = $this->getService();
 
-        $data = $service->excludes('orders')->collection($this->getTestUserData(), new UserTransformerWithDefaultIncludesStub())->getArray();
+        $data = $service->excludes('orders')->collection($this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub())->getArray();
 
         $this->assertFalse(isset($data['data'][0]['orders']));
     }
@@ -27,7 +30,8 @@ class TranformationTest extends Orchestra\Testbench\TestCase
     {
         $service = $this->getService();
 
-        $data = $service->collection($this->getTestUserData(), new UserTransformerWithDefaultIncludesStub())->getArray();
+        $data = $service->collection($this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub())->getArray();
 
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
@@ -56,7 +60,8 @@ class TranformationTest extends Orchestra\Testbench\TestCase
     {
         $service = $this->getService();
 
-        $data = $service->excludes('orders')->collection($this->getTestUserData(), new UserTransformerWithDefaultIncludesStub())->getArray();
+        $data = $service->excludes('orders')->collection($this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub())->getArray();
 
         $this->assertEquals([
             'data' => [
@@ -72,28 +77,29 @@ class TranformationTest extends Orchestra\Testbench\TestCase
         ], $data);
     }
 
-    /**
-     * @return \Cyvelnet\Laravel5Fractal\FractalServices
-     */
-    private function getService()
+    public function test_with_meta_data()
     {
-        return new \Cyvelnet\Laravel5Fractal\FractalServices(new \League\Fractal\Manager(), $this->app);
+        $service = $this->getService();
+
+        $data = $service->addMeta('foo', 'bar')->collection($this->getTestUserData(),
+            new UserTransformerStub())->getArray();
+
+        $this->assertEquals([
+            'data' => [
+                [
+                    'id'   => 1,
+                    'name' => 'Foo',
+                ],
+                [
+                    'id'   => 2,
+                    'name' => 'Bar',
+                ],
+            ],
+            'meta' => [
+                'foo' => 'bar'
+            ]
+        ], $data);
     }
 
-    /**
-     * @return array
-     */
-    private function getTestUserData()
-    {
-        return [
-            [
-                'id'   => 1,
-                'name' => 'Foo',
-            ],
-            [
-                'id'   => 2,
-                'name' => 'Bar',
-            ],
-        ];
-    }
+
 }

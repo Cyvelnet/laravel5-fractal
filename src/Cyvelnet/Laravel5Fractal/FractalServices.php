@@ -39,7 +39,17 @@ class FractalServices
     private $exclude_key;
 
     /**
-     * @param Manager   $manager
+     * @var array
+     */
+    private $meta = [];
+
+    /**
+     * @var array
+     */
+    private $fieldsets = [];
+
+    /**
+     * @param Manager $manager
      * @param Container $app
      */
     public function __construct(Manager $manager, Container $app)
@@ -134,17 +144,35 @@ class FractalServices
     }
 
     /**
+     * Parse field parameter.
+     *
+     * @param array $fieldsets Array of fields to include. It must be an array
+     *                         whose keys are resource types and values a string
+     *                         of the fields to return, separated by a comma
+     * @param array $fieldsets
+     *
+     * @return $this
+     */
+    public function fieldsets(array $fieldsets = [])
+    {
+        $this->fieldsets = $fieldsets;
+        return $this;
+    }
+
+    /**
      * transform item.
      *
      * @param $item
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null                                                  $resourceKey
+     * @param null $resourceKey
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
     public function item($item, $transformer, $resourceKey = null)
     {
         $resource = new Item($item, $transformer, $resourceKey);
+
+        $this->applyMetaValue($resource);
 
         return $this->scope($resource);
     }
@@ -154,8 +182,8 @@ class FractalServices
      *
      * @param $items
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null                                                  $resourceKey
-     * @param PaginatorInterface                                    $adapter
+     * @param null $resourceKey
+     * @param PaginatorInterface $adapter
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
      */
@@ -167,11 +195,40 @@ class FractalServices
     ) {
         $resources = new Collection($items, $transformer, $resourceKey);
 
+        $this->applyMetaValue($resources);
+
+        if ($adapter) {
+            $this->withPaginator($resources, $adapter);
+        }
+
         if ($items instanceof LengthAwarePaginator) {
-            $this->withPaginator($items, $resources, $adapter);
+
+            $adapter = new IlluminatePaginatorAdapter($items);
+            $this->withPaginator($resources, $adapter);
         }
 
         return $this->scope($resources);
+    }
+
+    /**
+     * add additional meta data to transformed data
+     *
+     * @param $key
+     * @param $data
+     *
+     * @return $this
+     */
+    public function addMeta($key, $data = null)
+    {
+        if (is_array($key)) {
+
+            $this->meta += $key;
+
+        } else {
+            $this->meta[$key] = $data;
+        }
+
+        return $this;
     }
 
     /**
@@ -183,7 +240,7 @@ class FractalServices
      */
     private function scope(ResourceInterface $resource)
     {
-        return new ScopeDataAdapter($this->manager->createData($resource));
+        return new ScopeDataAdapter($this->manager->parseFieldsets($this->fieldsets)->createData($resource));
     }
 
     /**
@@ -193,10 +250,14 @@ class FractalServices
      * @param $resources
      * @param $adapter
      */
-    private function withPaginator($items, &$resources, $adapter)
+    private function withPaginator(&$resources, $adapter)
     {
-        $adapter = new IlluminatePaginatorAdapter($items);
-
         $resources->setPaginator($adapter);
+    }
+
+    private function applyMetaValue($resource)
+    {
+        $resource->setMeta($this->meta);
+
     }
 }

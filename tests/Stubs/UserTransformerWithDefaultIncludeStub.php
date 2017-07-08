@@ -10,7 +10,7 @@ class UserTransformerWithDefaultIncludesStub extends TransformerAbstract
      *
      * @var array
      */
-    protected $availableIncludes = [];
+    protected $availableIncludes = ['orders'];
 
     /**
      * List of resources to automatically include.
@@ -23,7 +23,6 @@ class UserTransformerWithDefaultIncludesStub extends TransformerAbstract
      * Transform object into a generic array.
      *
      * @var
-     *
      * @return array
      */
     public function transform($resource)
@@ -40,15 +39,17 @@ class UserTransformerWithDefaultIncludesStub extends TransformerAbstract
     {
         $orders = [
             [
+                'id'   => 1,
                 'item' => 'item 1',
                 'qty'  => 100,
             ],
             [
+                'id'   => 2,
                 'item' => 'item 2',
                 'qty'  => 200,
             ],
         ];
 
-        return $this->collection($orders, new OrderTransformerStub());
+        return $this->collection($orders, new OrderTransformerStub(), 'order');
     }
 }
