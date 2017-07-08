@@ -24,10 +24,7 @@
         ],
         "psr-0": {
             "Cyvelnet\\Laravel5Fractal\\": "src/"
-        },
-        "files": [
-            "tests/TestCase.php"
-        ]
+        }
     },
     "extra":{
         "laravel":{
