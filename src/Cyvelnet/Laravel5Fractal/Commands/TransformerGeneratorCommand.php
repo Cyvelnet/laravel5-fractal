@@ -117,11 +117,14 @@ class TransformerGeneratorCommand extends Command
 
             // loading transformers template from views
             $view = $this->view->make('fractal::transformer',
-                ['namespace'  => $namespace,
-                 'class_name' => $class,
-                 'attributes' => $transformerAttrs,
-                 'modelClass' => $modelClass,
-                 'model'      => $model
+                [
+                    'namespace'   => $namespace,
+                    'class_name'  => $class,
+                    'attributes'  => $transformerAttrs,
+                    'modelClass'  => $modelClass,
+                    'model'       => $model,
+                    'parentClass' => $this->config->get('fractal.abstract_parent',
+                        'TransformerAbstract') ?: 'TransformerAbstract'
                 ]);
 
             if ($create) {

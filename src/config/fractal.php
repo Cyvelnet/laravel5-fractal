@@ -55,13 +55,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Transformer parent class
+    |--------------------------------------------------------------------------
+    |
+    | the parent class a transformer class extend
+    | By default \League\Fractal\TransformerAbstract use
+    | * The custom parent class must extends \League\Fractal\TransformerAbstract class
+    */
+    'abstract_parent' => null,
+
+    /*
+    |--------------------------------------------------------------------------
     | Models/Entities path
     |--------------------------------------------------------------------------
     |
     | Path where transformer looking for entities to generate transformation data.
     |
     */
-    'model_namespace'       => 'App',
+    'model_namespace' => 'App',
 
     /*
     |--------------------------------------------------------------------------
@@ -72,6 +83,7 @@ return [
     | * you are required to provide full namespace for custom serializer
     |
     */
-    'serializer'  => env('FRACTAL_SERIALIZER', 'ArraySerializer'), // DataArraySerializer,JsonApiSerializer, ArraySerializer
+    'serializer'      => env('FRACTAL_SERIALIZER', 'ArraySerializer'),
+    // DataArraySerializer,JsonApiSerializer, ArraySerializer
 
 ];

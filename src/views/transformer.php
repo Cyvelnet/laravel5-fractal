@@ -12,7 +12,7 @@ use League\Fractal\Resource\Item;' ?>
 <?= PHP_EOL ?>
 
 <?=
-"class {$class_name} extends TransformerAbstract
+"class {$class_name} extends {$parentClass}
 {" ?>
 
     /**
