@@ -6,10 +6,13 @@ namespace {$namespace};"?>
 use League\Fractal;
 use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Collection;
-use League\Fractal\Resource\Item;
-' ?>
+use League\Fractal\Resource\Item;' ?>
 
-<?= "class {$class_name} extends TransformerAbstract
+<?= $modelClass ? 'use '. trim($modelClass, '\\').'; ': ''; ?>
+<?= PHP_EOL ?>
+
+<?=
+"class {$class_name} extends TransformerAbstract
 {" ?>
 
     /**
@@ -29,10 +32,10 @@ use League\Fractal\Resource\Item;
     /**
      * Transform object into a generic array
      *
-     * @var $resource
+     * @var <?= ltrim("{$modelClass} \$resource").PHP_EOL ?>
      * @return array
      */
-    public function transform($resource)
+    public function transform(<?= ltrim("{$model} \$resource") ?>)
     {
         return [
 
