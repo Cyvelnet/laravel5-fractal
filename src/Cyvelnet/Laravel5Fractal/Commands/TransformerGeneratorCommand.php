@@ -4,10 +4,7 @@ namespace Cyvelnet\Laravel5Fractal\Commands;
 
 use Illuminate\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem as File;
-use Illuminate\Support\Arr;
 use Illuminate\View\Factory as View;
-use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 
 /**
  * Class TransformerGeneratorCommand.
@@ -45,9 +42,9 @@ class TransformerGeneratorCommand extends Command
     protected $app;
 
     /**
-     * @param \Illuminate\Config\Repository $config
-     * @param View $view
-     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param \Illuminate\Config\Repository                                 $config
+     * @param View                                                          $view
+     * @param \Illuminate\Filesystem\Filesystem                             $filesystem
      * @param \Illuminate\Foundation\Application|\Laravel\Lumen\Application $app
      */
     public function __construct(Config $config, View $view, File $filesystem, $app)
@@ -84,7 +81,6 @@ class TransformerGeneratorCommand extends Command
             $namespace = $this->option('namespace') ? $this->option('namespace') : $this->config->get('fractal.namespace');
 
             list($class, $namespace, $directory) = $this->getTransformerProperties($class_name, $namespace, $directory);
-
 
             is_dir($directory) ?: $this->filesystem->makeDirectory($directory, 0755, true);
 
@@ -124,7 +120,7 @@ class TransformerGeneratorCommand extends Command
                     'modelClass'  => $modelClass,
                     'model'       => $model,
                     'parentClass' => $this->config->get('fractal.abstract_parent',
-                        'TransformerAbstract') ?: 'TransformerAbstract'
+                        'TransformerAbstract') ?: 'TransformerAbstract',
                 ]);
 
             if ($create) {
@@ -135,5 +131,4 @@ class TransformerGeneratorCommand extends Command
             $this->error("Transformer creation failed due to : {$e->getMessage()}");
         }
     }
-
 }
