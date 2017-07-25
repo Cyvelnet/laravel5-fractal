@@ -2,14 +2,12 @@
 
 namespace Cyvelnet\Laravel5Fractal\Commands;
 
-
 use Illuminate\Support\Arr;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 
 abstract class Command extends \Illuminate\Console\Command
 {
-
     /**
      * get application path.
      *
@@ -19,7 +17,7 @@ abstract class Command extends \Illuminate\Console\Command
      */
     protected function appPath($path)
     {
-        return base_path('/app/' . $path);
+        return base_path('/app/'.$path);
     }
 
     /**
@@ -78,9 +76,9 @@ abstract class Command extends \Illuminate\Console\Command
 
             $class = basename($class);
 
-            $namespace = rtrim(str_replace('/', '\\', $namespace . "\\{$additionalLevel}"), '\\');
+            $namespace = rtrim(str_replace('/', '\\', $namespace."\\{$additionalLevel}"), '\\');
 
-            $storePath = str_replace('//', '/', rtrim($storePath, '/') . "/{$additionalLevel}");
+            $storePath = str_replace('//', '/', rtrim($storePath, '/')."/{$additionalLevel}");
         }
 
         return [
@@ -107,7 +105,7 @@ abstract class Command extends \Illuminate\Console\Command
 
                 if ($model->isSubclassOf('Illuminate\Database\Eloquent\Model')) {
                     $mdl = $this->app->make($classNamespace);
-                    $table = $mdl->getConnection()->getTablePrefix() . $mdl->getTable();
+                    $table = $mdl->getConnection()->getTablePrefix().$mdl->getTable();
                     $schema = $mdl->getConnection()->getDoctrineSchemaManager($table);
 
                     $database = null;
@@ -155,18 +153,16 @@ abstract class Command extends \Illuminate\Console\Command
         ) {
             return 'double';
         } else {
-
             if ($type instanceof \Doctrine\DBAL\Types\IntegerType or $type instanceof \Doctrine\DBAL\Types\BigIntType or $type instanceof
                 \Doctrine\DBAL\Types\SmallIntType
             ) {
                 return 'int';
             }
-
         }
     }
 
     /**
-     * get model namespace from a class name
+     * get model namespace from a class name.
      *
      * @param $class
      *
@@ -174,10 +170,8 @@ abstract class Command extends \Illuminate\Console\Command
      */
     protected function getModelNamespace($class)
     {
-
         $namespace = $this->config->get('fractal.model_namespace');
 
         return "\\{$namespace}\\{$class}";
     }
-
 }

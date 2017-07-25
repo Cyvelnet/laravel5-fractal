@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;' ?>
 
-<?= $modelClass ? 'use '. trim($modelClass, '\\').'; ': ''; ?>
+<?= $modelClass ? 'use '.trim($modelClass, '\\').'; ' : ''; ?>
 <?= PHP_EOL ?>
 
 <?=
