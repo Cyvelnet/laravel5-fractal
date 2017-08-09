@@ -86,7 +86,7 @@ Fractal::item($user, new UserTransformer());
 ```
 
 ### Fractal::collection();
-Transform a single record
+Transform a collection of records
 ```php 
 
 $users = User::where('activated', true)->get();
