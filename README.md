@@ -67,10 +67,10 @@ Auto inject/embed sub resources are disabled by default, to enable this feature,
 `cyvelnet/fractal` come with a helpful commandline to assist your api transformation, just type and your Eloquent model attributes will be added to your transform array automatically
 ````bash
  // generate a empty transformer
- php artisan make:tranformer UserTransformer
+ php artisan make:transformer UserTransformer
  
  // generate a modeled transformer
- php artisan make:tranformer UserTransformer -m User
+ php artisan make:transformer UserTransformer -m User
 ````
 
 ### Usage
@@ -86,7 +86,7 @@ Fractal::item($user, new UserTransformer());
 ```
 
 ### Fractal::collection();
-Transform a single record
+Transform a collection of records
 ```php 
 
 $users = User::where('activated', true)->get();
@@ -102,7 +102,7 @@ Fractal::collection($users, new UserTransformer(), $resourceKey);
 Inject sub resources
 ```php 
 
-Fractal::includes('orders')  // where 'orders' is defined in your tranformer class's $availableIncludes array
+Fractal::includes('orders')  // where 'orders' is defined in your transformer class's $availableIncludes array
 
 ```
 
