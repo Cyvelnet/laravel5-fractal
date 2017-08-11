@@ -117,7 +117,7 @@ class TransformerGeneratorCommand extends Command
                     'namespace'   => $namespace,
                     'class_name'  => $class,
                     'attributes'  => $transformerAttrs,
-                    'modelClass'  => $modelClass,
+                    'modelClass'  => $model ? $modelClass : null,
                     'model'       => $model,
                     'parentClass' => $this->config->get('fractal.abstract_parent',
                         'TransformerAbstract') ?: 'TransformerAbstract',
