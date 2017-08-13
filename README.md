@@ -12,6 +12,7 @@ A simple fractal service provider and transformer generator for laravel 5 and lu
 * [Config](#config)
 * [Command](#command)
 * [Usage](#usage)
+* [Trait](#trait) (Optional feature since >= 2.1.3)
 
 ## Installation
 
@@ -114,7 +115,7 @@ Fractal::excludes('orders')
 
 ```
 
-## Fractal::setSerializer()
+### Fractal::setSerializer()
 Change transformer serializer
 ```php 
 
@@ -122,14 +123,14 @@ Fractal::setSerializer(\Acme\MySerializer); // where MySerializer is a class ext
 
 ```
 
-## Fractal::fieldsets()
+### Fractal::fieldsets()
 add sparse fieldset
 ```php 
 
 Fractal::fieldsets(['orders' => 'item,qty,total,date_order'])
 ```
 
-## Fractal::addMeta()
+### Fractal::addMeta()
 add extra meta data to root
 ```php 
 
@@ -143,3 +144,7 @@ Fractal::addMeta([
     ])
 
 ```
+
+## Trait
+
+https://github.com/Cyvelnet/laravel5-fractal/wiki/Transformable-Trait

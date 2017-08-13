@@ -83,7 +83,7 @@ class FractalServices
     /**
      * transform a collection.
      *
-     * @param $items
+     * @param                                                       $items
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
      * @param null                                                  $resourceKey
      * @param PaginatorInterface                                    $adapter
@@ -141,7 +141,6 @@ class FractalServices
      * @param array $fieldsets Array of fields to include. It must be an array
      *                         whose keys are resource types and values a string
      *                         of the fields to return, separated by a comma
-     * @param array $fieldsets
      *
      * @return $this
      */
@@ -186,7 +185,7 @@ class FractalServices
     /**
      * transform item.
      *
-     * @param $item
+     * @param                                                       $item
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
      * @param null                                                  $resourceKey
      *
