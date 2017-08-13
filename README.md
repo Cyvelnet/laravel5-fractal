@@ -12,6 +12,7 @@ A simple fractal service provider and transformer generator for laravel 5 and lu
 * [Config](#config)
 * [Command](#command)
 * [Usage](#usage)
+* [Transformable Trait](#trait) (Optional feature since >= 2.1.3)
 
 ## Installation
 
@@ -143,3 +144,6 @@ Fractal::addMeta([
     ])
 
 ```
+
+## Transformable Trait
+(Read Transformable Trait demo)[https://github.com/Cyvelnet/laravel5-fractal/wiki/Transformable-Trait]
