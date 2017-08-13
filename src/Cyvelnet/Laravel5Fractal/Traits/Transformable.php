@@ -5,7 +5,7 @@ namespace Cyvelnet\Laravel5Fractal\Traits;
 use League\Fractal\Pagination\PaginatorInterface;
 
 /**
- * Trait Transformable
+ * Trait Transformable.
  */
 trait Transformable
 {
@@ -31,7 +31,6 @@ trait Transformable
         }
 
         return $this->getService()->collection($data, $transformer, $resourceKey, $adapter);
-
     }
 
     /**
@@ -64,7 +63,6 @@ trait Transformable
 
     public function includes($excludes)
     {
-
         $this->getService()->includes($excludes);
 
         return $this;
@@ -79,17 +77,15 @@ trait Transformable
      */
     public function item($data, $transformer = null, $resourceKey = null)
     {
-
         if (!$transformer) {
             $transformer = $this->getTransformer();
         }
 
         return $this->getService()->item($data, $transformer, $resourceKey);
-
     }
 
     /**
-     * transformer
+     * transformer.
      *
      * @param                                                    $data
      * @param null|mixed|\Callable                               $transformer
@@ -107,17 +103,14 @@ trait Transformable
         $fractal = $this->getService();
 
         if ($this->isCollection($data)) {
-
             return $fractal->collection($data, $transformer, $resourceKey, $adapter);
-
         }
 
         return $fractal->item($data, $transformer, $resourceKey);
-
     }
 
     /**
-     * classes that should recognized as a collection
+     * classes that should recognized as a collection.
      *
      * @return array
      */
@@ -132,24 +125,21 @@ trait Transformable
     }
 
     /**
-     * get transformer defined in class scope
+     * get transformer defined in class scope.
      *
      * @return mixed|bool
      */
     protected function getTransformer()
     {
-
         if (property_exists($this, $transformer = $this->getTransformerProperty())) {
-
             return app($this->{$transformer});
-
         }
 
         return false;
     }
 
     /**
-     * get transformer class property key
+     * get transformer class property key.
      *
      * @return string
      */
@@ -163,7 +153,7 @@ trait Transformable
     }
 
     /**
-     * determine if an object should be recognize as collection
+     * determine if an object should be recognize as collection.
      *
      * @return bool
      */
@@ -189,7 +179,7 @@ trait Transformable
     }
 
     /**
-     * get a fractal services instance
+     * get a fractal services instance.
      *
      * @return \Cyvelnet\Laravel5Fractal\FractalServices
      */
@@ -197,5 +187,4 @@ trait Transformable
     {
         return app('fractal');
     }
-
 }
