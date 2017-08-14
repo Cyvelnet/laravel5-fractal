@@ -2,8 +2,8 @@
 
 namespace Cyvelnet\Laravel5Fractal\Traits;
 
-use League\Fractal\Pagination\PaginatorInterface;
 use Illuminate\Pagination\AbstractPaginator as Paginator;
+use League\Fractal\Pagination\PaginatorInterface;
 
 /**
  * Trait Transformable.
