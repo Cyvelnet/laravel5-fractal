@@ -16,7 +16,7 @@
         "doctrine/dbal": "^2.5"
     },
     "require-dev": {
-        "orchestra/testbench": "3.2.*"
+        "orchestra/testbench": "^3.0"
     },
     "autoload": {
         "classmap": [
@@ -24,7 +24,10 @@
         ],
         "psr-0": {
             "Cyvelnet\\Laravel5Fractal\\": "src/"
-        }
+        },
+        "files": [
+            "tests/TestCase.php"
+        ]
     },
     "extra":{
         "laravel":{
