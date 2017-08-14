@@ -3,6 +3,7 @@
 namespace Cyvelnet\Laravel5Fractal\Traits;
 
 use League\Fractal\Pagination\PaginatorInterface;
+use Illuminate\Pagination\AbstractPaginator as Paginator;
 
 /**
  * Trait Transformable.
@@ -116,12 +117,7 @@ trait Transformable
      */
     protected function getCollectionClass()
     {
-        return [
-            'Illuminate\Support\Collection',
-            'Illuminate\Database\Eloquent\Collection',
-            'Illuminate\Pagination\LengthAwarePaginator',
-            'Illuminate\Pagination\Paginator',
-        ];
+        return [];
     }
 
     /**
@@ -159,19 +155,17 @@ trait Transformable
      */
     protected function isCollection($data)
     {
-        if (is_array($data)) {
+        if (is_array($data) || $data instanceof \Illuminate\Support\Collection || $data instanceof Paginator) {
             return true;
         }
 
         $length = count($this->getCollectionClass());
 
-        if ($length) {
-            for ($i = 0; $i < $length; $i++) {
-                $class = \Illuminate\Support\Arr::get($this->getCollectionClass(), $i);
+        for ($i = 0; $i < $length; $i++) {
+            $class = \Illuminate\Support\Arr::get($this->getCollectionClass(), $i);
 
-                if ($data instanceof $class) {
-                    return true;
-                }
+            if ($data instanceof $class) {
+                return true;
             }
         }
 
