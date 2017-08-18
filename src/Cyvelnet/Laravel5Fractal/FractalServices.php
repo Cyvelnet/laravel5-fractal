@@ -49,7 +49,7 @@ class FractalServices
     private $fieldsets = [];
 
     /**
-     * @param Manager   $manager
+     * @param Manager $manager
      * @param Container $app
      */
     public function __construct(Manager $manager, Container $app)
@@ -85,10 +85,10 @@ class FractalServices
      *
      * @param                                                       $items
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null                                                  $resourceKey
-     * @param PaginatorInterface                                    $adapter
+     * @param null $resourceKey
+     * @param PaginatorInterface $adapter
      *
-     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed
      */
     public function collection(
         $items,
@@ -187,9 +187,9 @@ class FractalServices
      *
      * @param                                                       $item
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null                                                  $resourceKey
+     * @param null $resourceKey
      *
-     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed
      */
     public function item($item, $transformer, $resourceKey = null)
     {

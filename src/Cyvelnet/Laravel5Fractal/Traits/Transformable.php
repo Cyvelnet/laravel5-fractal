@@ -25,6 +25,16 @@ trait Transformable
         return $this;
     }
 
+    /**
+     * transform a collection.
+     *
+     * @param                                                       $data
+     * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
+     * @param null $resourceKey
+     * @param PaginatorInterface $adapter
+     *
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed
+     */
     public function collection($data, $transformer = null, $resourceKey = null, PaginatorInterface $adapter = null)
     {
         if (!$transformer) {
@@ -35,7 +45,9 @@ trait Transformable
     }
 
     /**
-     * @param $excludes
+     * excludes sub level from data transformer.
+     *
+     * @param string|array $excludes
      *
      * @return $this
      */
@@ -62,14 +74,23 @@ trait Transformable
         return $this;
     }
 
-    public function includes($excludes)
+    /**
+     * includes sub level data transformer.
+     *
+     * @param string|array $includes
+     *
+     * @return $this
+     */
+    public function includes($includes)
     {
-        $this->getService()->includes($excludes);
+        $this->getService()->includes($includes);
 
         return $this;
     }
 
     /**
+     * transform item.
+     *
      * @param      $data
      * @param null $transformer
      * @param null $resourceKey
@@ -86,14 +107,14 @@ trait Transformable
     }
 
     /**
-     * transformer.
+     * transform data.
      *
      * @param                                                    $data
-     * @param null|mixed|\Callable                               $transformer
-     * @param null                                               $resourceKey
+     * @param null|mixed|\Callable $transformer
+     * @param null $resourceKey
      * @param \League\Fractal\Pagination\PaginatorInterface|null $adapter
      *
-     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter
+     * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed
      */
     public function transform($data, $transformer = null, $resourceKey = null, PaginatorInterface $adapter = null)
     {
