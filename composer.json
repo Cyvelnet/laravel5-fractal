@@ -25,7 +25,9 @@
         ],
         "psr-0": {
             "Cyvelnet\\Laravel5Fractal\\": "src/"
-        },
+        }
+    },
+    "autoload-dev": {
         "files": [
             "tests/TestCase.php"
         ]
