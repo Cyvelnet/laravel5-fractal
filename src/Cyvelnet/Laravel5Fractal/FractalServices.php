@@ -10,6 +10,7 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Pagination\PaginatorInterface;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
+use League\Fractal\Resource\Primitive;
 use League\Fractal\Resource\ResourceInterface;
 
 /**
@@ -81,7 +82,7 @@ class FractalServices
     }
 
     /**
-     * transform a collection.
+     * transform resource collection.
      *
      * @param                                                       $items
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
@@ -183,7 +184,7 @@ class FractalServices
     }
 
     /**
-     * transform item.
+     * transform a single resource.
      *
      * @param                                                       $item
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer

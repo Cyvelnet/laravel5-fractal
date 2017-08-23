@@ -27,7 +27,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
     /**
      * generate a json response.
      *
-     * @param int   $http_status
+     * @param int $http_status
      * @param array $header
      *
      * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
@@ -50,20 +50,24 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
     /**
      * get the transformed json data.
      *
+     * @param int $options
+     *
      * @return string
      */
-    public function getJson()
+    public function getJson($options = 0)
     {
-        return $this->scope->toJson();
+        return $this->scope->toJson($options);
     }
 
     /**
+     * get the transformed json data.
+     *
      * @param int $options
      *
      * @return string
      */
     public function toJson($options = 0)
     {
-        return json_encode($this->scope->toArray(), $options);
+        return $this->scope->toJson($options);
     }
 }

@@ -26,7 +26,7 @@ trait Transformable
     }
 
     /**
-     * transform a collection.
+     * transform resource collection.
      *
      * @param                                                       $data
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
@@ -89,7 +89,7 @@ trait Transformable
     }
 
     /**
-     * transform item.
+     * transform a single resource.
      *
      * @param      $data
      * @param null $transformer
