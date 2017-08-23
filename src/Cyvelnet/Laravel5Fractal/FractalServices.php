@@ -10,7 +10,6 @@ use League\Fractal\Pagination\IlluminatePaginatorAdapter;
 use League\Fractal\Pagination\PaginatorInterface;
 use League\Fractal\Resource\Collection;
 use League\Fractal\Resource\Item;
-use League\Fractal\Resource\Primitive;
 use League\Fractal\Resource\ResourceInterface;
 
 /**

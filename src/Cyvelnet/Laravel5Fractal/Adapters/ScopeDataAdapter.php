@@ -27,7 +27,7 @@ class ScopeDataAdapter implements ScopeDataAdapterInterface, Jsonable
     /**
      * generate a json response.
      *
-     * @param int $http_status
+     * @param int   $http_status
      * @param array $header
      *
      * @return ResponseFactory|\Symfony\Component\HttpFoundation\Response
