@@ -30,8 +30,8 @@ trait Transformable
      *
      * @param                                                       $data
      * @param \League\Fractal\TransformerAbstract|callable|\Closure $transformer
-     * @param null $resourceKey
-     * @param PaginatorInterface $adapter
+     * @param null                                                  $resourceKey
+     * @param PaginatorInterface                                    $adapter
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed
      */
@@ -107,7 +107,7 @@ trait Transformable
     }
 
     /**
-     * set data serializer
+     * set data serializer.
      *
      * @param \League\Fractal\Serializer\SerializerAbstract $serializer
      */
@@ -120,8 +120,8 @@ trait Transformable
      * transform data.
      *
      * @param                                                    $data
-     * @param null|mixed|\Callable $transformer
-     * @param null $resourceKey
+     * @param null|mixed|\Callable                               $transformer
+     * @param null                                               $resourceKey
      * @param \League\Fractal\Pagination\PaginatorInterface|null $adapter
      *
      * @return \Cyvelnet\Laravel5Fractal\Adapters\ScopeDataAdapter|mixed
@@ -152,13 +152,12 @@ trait Transformable
     }
 
     /**
-     * get transformer serializer defined in class scope
+     * get transformer serializer defined in class scope.
      *
      * @return bool|string
      */
     protected function getSerializer()
     {
-
         if (property_exists($this, $serializer = $this->getSerializerProperty())) {
             return $serializer;
         }
