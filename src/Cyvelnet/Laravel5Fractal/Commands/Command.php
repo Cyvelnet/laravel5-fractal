@@ -105,7 +105,13 @@ abstract class Command extends \Illuminate\Console\Command
 
                 if ($model->isSubclassOf('Illuminate\Database\Eloquent\Model')) {
                     $mdl = $this->app->make($classNamespace);
-                    $table = $mdl->getConnection()->getTablePrefix().$mdl->getTable();
+                    $table = $mdl->getTable();
+
+                    if (is_array($table)) {
+                        $table = array_first($table);
+                    }
+
+                    $table = $mdl->getConnection()->getTablePrefix().$table;
                     $schema = $mdl->getConnection()->getDoctrineSchemaManager($table);
 
                     $database = null;
