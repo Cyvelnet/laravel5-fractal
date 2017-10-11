@@ -58,7 +58,7 @@ return [
     | Transformer parent class
     |--------------------------------------------------------------------------
     |
-    | the parent class a transformer class extend
+    | the parent class a transformer class extend in FQCN
     | By default \League\Fractal\TransformerAbstract use
     | * The custom parent class must extends \League\Fractal\TransformerAbstract class
     */
