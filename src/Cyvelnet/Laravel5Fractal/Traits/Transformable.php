@@ -239,6 +239,6 @@ trait Transformable
      */
     protected function getService()
     {
-        return app('fractal')->setSerializer();
+        return app('fractal')->setSerializer($this->getSerializer());
     }
 }
