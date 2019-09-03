@@ -1,6 +1,5 @@
 <?php
 
-
 use League\Fractal\TransformerAbstract;
 
 class OrderTransformerStub extends TransformerAbstract
