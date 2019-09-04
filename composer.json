@@ -1,7 +1,7 @@
 {
     "name": "cyvelnet/laravel5-fractal",
-    "description": "A simple fractal service provider and transformer generator with model attributes for laravel 5.",
-    "keywords": ["laravel5","fractal","api","transformer"],
+    "description": "A simple fractal service provider and transformer generator with model attributes for laravel >=5.",
+    "keywords": ["laravel","fractal","api","transformer"],
     "license": "MIT",
     "authors": [
         {
