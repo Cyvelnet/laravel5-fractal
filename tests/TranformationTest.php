@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Arr;
+
 /**
  * Class TranformationTest.
  */
@@ -98,5 +100,56 @@ class TranformationTest extends TestCase
                 'foo' => 'bar',
             ],
         ], $data);
+    }
+
+    public function test_sub_relation_with_getting_only_one_record_from_sub_relation()
+    {
+        $service = $this->getService();
+
+        $data = $service->includes('order_histories:limit(1|0)')->collection($this->getTestUserData(),
+            new UserTransformerStub())->getArray();
+
+
+        $this->assertEquals(1, count(Arr::get($data, 'data.0.order_histories.data')));
+        $this->assertEquals([
+            'data' => [
+                [
+                    'id'              => 1,
+                    'name'            => 'Foo',
+                    'order_histories' => [
+                        'data' => [
+                            [
+                                'id'   => 1,
+                                'item' => 'item 1',
+                                'qty'  => 100,
+                            ]
+                        ],
+                    ],
+                ],
+                [
+                    'id'              => 2,
+                    'name'            => 'Bar',
+                    'order_histories' => [
+                        'data' => [
+                            [
+                                'id'   => 1,
+                                'item' => 'item 1',
+                                'qty'  => 100,
+                            ]
+                        ],
+                    ],
+                ],
+            ],
+        ], $data);
+    }
+
+    public function test_sub_relation_with_getting_only_n_record_from_sub_relation()
+    {
+        $service = $this->getService();
+
+        $data = $service->includes('order_histories:limit(3|0)')->collection($this->getTestUserData(),
+            new UserTransformerStub())->getArray();
+
+        $this->assertEquals(3, count(Arr::get($data, 'data.0.order_histories.data')));
     }
 }
