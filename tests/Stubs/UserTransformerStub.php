@@ -80,7 +80,7 @@ class UserTransformerStub extends TransformerAbstract
                 'id'   => 5,
                 'item' => 'item 5',
                 'qty'  => 500,
-            ]
+            ],
         ]);
 
         list($limit, $offset) = $params->get('limit');
