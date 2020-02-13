@@ -109,7 +109,6 @@ class TranformationTest extends TestCase
         $data = $service->includes('order_histories:limit(1|0)')->collection($this->getTestUserData(),
             new UserTransformerStub())->getArray();
 
-
         $this->assertEquals(1, count(Arr::get($data, 'data.0.order_histories.data')));
         $this->assertEquals([
             'data' => [
@@ -122,7 +121,7 @@ class TranformationTest extends TestCase
                                 'id'   => 1,
                                 'item' => 'item 1',
                                 'qty'  => 100,
-                            ]
+                            ],
                         ],
                     ],
                 ],
@@ -135,7 +134,7 @@ class TranformationTest extends TestCase
                                 'id'   => 1,
                                 'item' => 'item 1',
                                 'qty'  => 100,
-                            ]
+                            ],
                         ],
                     ],
                 ],
