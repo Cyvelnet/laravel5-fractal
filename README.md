@@ -12,7 +12,8 @@ A simple fractal service provider and transformer generator for laravel 5 and lu
 * [Config](#config)
 * [Command](#command)
 * [Usage](#usage)
-* [Trait](#trait) (Optional feature since >= 2.1.3)
+* [Trait](#trait) (Optional feature >= 2.1.3)
+* [Sub Relationship Modifier](#trait) (Optional feature >=2.4.0)
 * [Extra](#extra) Extra
 
 ## Installation
@@ -149,6 +150,10 @@ Fractal::addMeta([
 ## Trait
 
 https://github.com/Cyvelnet/laravel5-fractal/wiki/Transformable-Trait
+
+## Sub Relationship Modifier
+
+https://github.com/Cyvelnet/laravel5-fractal/wiki/Sub-Relationship-Modifier
 
 ## Extra
 
