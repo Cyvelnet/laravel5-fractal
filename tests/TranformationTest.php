@@ -11,8 +11,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->includes('orders')->collection($this->getTestUserData(),
-            new UserTransformerStub())->getArray();
+        $data = $service->includes('orders')->collection(
+            $this->getTestUserData(),
+            new UserTransformerStub()
+        )->getArray();
 
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
@@ -21,8 +23,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->excludes('orders')->collection($this->getTestUserData(),
-            new UserTransformerWithDefaultIncludesStub())->getArray();
+        $data = $service->excludes('orders')->collection(
+            $this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub()
+        )->getArray();
 
         $this->assertFalse(isset($data['data'][0]['orders']));
     }
@@ -31,8 +35,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->collection($this->getTestUserData(),
-            new UserTransformerWithDefaultIncludesStub())->getArray();
+        $data = $service->collection(
+            $this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub()
+        )->getArray();
 
         $this->assertTrue(isset($data['data'][0]['orders']));
     }
@@ -61,8 +67,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->excludes('orders')->collection($this->getTestUserData(),
-            new UserTransformerWithDefaultIncludesStub())->getArray();
+        $data = $service->excludes('orders')->collection(
+            $this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub()
+        )->getArray();
 
         $this->assertEquals([
             'data' => [
@@ -82,8 +90,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->addMeta('foo', 'bar')->collection($this->getTestUserData(),
-            new UserTransformerStub())->getArray();
+        $data = $service->addMeta('foo', 'bar')->collection(
+            $this->getTestUserData(),
+            new UserTransformerStub()
+        )->getArray();
 
         $this->assertEquals([
             'data' => [
@@ -106,8 +116,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->includes('order_histories:limit(1|0)')->collection($this->getTestUserData(),
-            new UserTransformerStub())->getArray();
+        $data = $service->includes('order_histories:limit(1|0)')->collection(
+            $this->getTestUserData(),
+            new UserTransformerStub()
+        )->getArray();
 
         $this->assertEquals(1, count(Arr::get($data, 'data.0.order_histories.data')));
         $this->assertEquals([
@@ -146,8 +158,10 @@ class TranformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->includes('order_histories:limit(3|0)')->collection($this->getTestUserData(),
-            new UserTransformerStub())->getArray();
+        $data = $service->includes('order_histories:limit(3|0)')->collection(
+            $this->getTestUserData(),
+            new UserTransformerStub()
+        )->getArray();
 
         $this->assertEquals(3, count(Arr::get($data, 'data.0.order_histories.data')));
     }
