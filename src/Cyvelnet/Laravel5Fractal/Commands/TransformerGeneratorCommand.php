@@ -90,8 +90,10 @@ class TransformerGeneratorCommand extends Command
             $transformer = "{$directory}/{$class}";
 
             if ($this->filesystem->exists("{$transformer}.php")) {
-                if ($usrResponse = strtolower($this->ask("The filesystem ['{$class}'] already exists, overwrite? [y/n]",
-                    null))
+                if ($usrResponse = strtolower($this->ask(
+                    "The filesystem ['{$class}'] already exists, overwrite? [y/n]",
+                    null
+                ))
                 ) {
                     switch ($usrResponse) {
                         case 'y':
@@ -112,16 +114,20 @@ class TransformerGeneratorCommand extends Command
             }
 
             // loading transformers template from views
-            $view = $this->view->make('fractal::transformer',
+            $view = $this->view->make(
+                'fractal::transformer',
                 [
                     'namespace'   => $namespace,
                     'class_name'  => $class,
                     'attributes'  => $transformerAttrs,
                     'modelClass'  => $model ? $modelClass : null,
                     'model'       => $model,
-                    'parentClass' => $this->config->get('fractal.abstract_parent',
-                        'TransformerAbstract') ?: 'TransformerAbstract',
-                ]);
+                    'parentClass' => $this->config->get(
+                        'fractal.abstract_parent',
+                        'TransformerAbstract'
+                    ) ?: 'TransformerAbstract',
+                ]
+            );
 
             if ($create) {
                 $this->filesystem->put("{$directory}/{$class}.php", $view->render());

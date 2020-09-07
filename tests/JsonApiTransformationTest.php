@@ -8,8 +8,11 @@ class JsonApiTransformationTest extends TestCase
     {
         $service = $this->getService();
 
-        $data = $service->setSerializer(new JsonApiSerializer())->fieldsets(['orders' => 'item, qty'])->collection($this->getTestUserData(),
-            new UserTransformerWithDefaultIncludesStub(), 'user')->getArray();
+        $data = $service->setSerializer(new JsonApiSerializer())->fieldsets(['orders' => 'item, qty'])->collection(
+            $this->getTestUserData(),
+            new UserTransformerWithDefaultIncludesStub(),
+            'user'
+        )->getArray();
 
         $this->assertEquals([
             'data'     => [
