@@ -120,7 +120,7 @@ trait Transformable
      * transform data.
      *
      * @param                                                    $data
-     * @param null|mixed|\Callable                               $transformer
+     * @param null|mixed|\callable                               $transformer
      * @param null                                               $resourceKey
      * @param \League\Fractal\Pagination\PaginatorInterface|null $adapter
      *
