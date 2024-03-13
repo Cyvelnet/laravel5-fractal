@@ -69,7 +69,6 @@ abstract class Command extends \Illuminate\Console\Command
      */
     protected function getTransformerProperties($class, $namespace, $storePath)
     {
-
         // check if class contains additional level
         if (strpos($class, '/') !== false) {
             $additionalLevel = substr($class, 0, strrpos($class, '/'));
@@ -135,7 +134,7 @@ abstract class Command extends \Illuminate\Console\Command
                 }
             } else {
                 $this->error("Your model {$class} was not found in {$this->config->get('fractal.model_namespace')}\\ \r\nIf this is the first time you get this message, try to update /config/fractal.php to make changes to model_namespace accordingly.");
-                exit();
+                exit;
             }
         }
 

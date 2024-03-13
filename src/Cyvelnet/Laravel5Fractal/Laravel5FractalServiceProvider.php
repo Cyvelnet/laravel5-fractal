@@ -39,7 +39,6 @@ class Laravel5FractalServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($source_config, 'fractal');
 
         $this->app->singleton('fractal', function ($app) {
-
             // retrieves configurations
 
             $autoload = $app['config']->get('fractal.autoload');

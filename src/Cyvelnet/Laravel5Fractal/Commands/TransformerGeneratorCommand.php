@@ -64,7 +64,6 @@ class TransformerGeneratorCommand extends Command
     public function handle()
     {
         try {
-
             // replace all space after ucwords
             $class_name = preg_replace('/\s+/', '', ucwords($this->argument('name')));
 
